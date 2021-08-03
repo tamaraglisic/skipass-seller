@@ -1,1 +1,1 @@
-# skipass-seller
+# Diplomski rad

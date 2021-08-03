@@ -1,0 +1,48 @@
+<form class="reactiveForm" [formGroup]="searchForm" (ngSubmit)="search()" style="display: block; width: 200px; height: 80px; margin-left:auto; margin-right:auto;">
+    <div class="example-container" >
+    <mat-form-field appearance="fill">
+        <mat-label>Search by name</mat-label>
+        <input id="searchContent" matInput formControlName="name">
+    </mat-form-field>
+    <mat-dialog-actions align="center">
+        <button id="submitSearch" type="submit" mat-raised-button color="success">Search</button>
+    </mat-dialog-actions>
+    </div>
+</form>
+<br><br>
+
+<div style="margin-left: 20px;">
+    <br>
+    <table class="styled-table">
+        <thead>
+        <tr>         
+         
+            <th>Name</th>
+            <th>Country</th>
+            <th>Season starts</th>
+            <th>Season ends</th>
+            <th>Capacity</th>
+            <th  *ngIf="role == 'ROLE_ADMIN'">Edit resort</th>
+            <th  *ngIf="role == 'ROLE_ADMIN'">Delete resort</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let res of resorts">
+            <td>{{res.name}}</td>
+            <td>{{res.country}}</td>
+            <td>{{res.seasonStarts | date}}</td>
+            <td>{{res.seasonEnds | date}}</td>
+            <td>{{res.capacity}}</td>
+            <td  *ngIf="role == 'ROLE_ADMIN'">
+                <button mat-button color="primary" (click)="edit(res.id)">Edit</button>
+            </td>
+            <td  *ngIf="role == 'ROLE_ADMIN'">
+                <button mat-button color="primary" (click)="delete(res.id)">Delete</button>
+            </td>
+            </tr>
+    </tbody>
+
+    </table>
+    
+</div>

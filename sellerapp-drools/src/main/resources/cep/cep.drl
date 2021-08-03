@@ -1,0 +1,54 @@
+package cep
+import com.project.sellerapp.dto.LoginEvent
+import com.project.sellerapp.dto.ReservationEvent
+
+declare SuspiciousUserEvent
+    @role(event)
+    @expires(1m)
+    username: String
+    reason: String
+end
+
+
+declare SuspiciousReservationEvent
+    @role(event)
+    @expires(1m)
+    username: String
+    reason: String
+end
+
+rule "More than 5 login requests in a minute"
+	agenda-group "login"
+	no-loop
+    when
+        $u1: LoginEvent($username: username)
+        Number(intValue >= 5) from accumulate(
+            $u2: LoginEvent(
+                this != $u1, 
+                username == $username
+            )over window:time( 1m ),
+            count($u2)
+        )
+        not (SuspiciousUserEvent(username == $username, reason == "Many login requests"))
+    then
+    	System.out.println("Many login requests" );
+        insert(new SuspiciousUserEvent($username, "Many login requests"));
+end
+
+rule "More than 5 reservations requests in a minute"
+	agenda-group "reservations"
+	no-loop
+    when
+        $u1: ReservationEvent($username: username)
+        Number(intValue >= 5) from accumulate(
+            $u2: ReservationEvent(
+                this != $u1, 
+                username == $username
+            )over window:time( 1m ),
+            count($u2)
+        )
+        not (SuspiciousReservationEvent(username == $username, reason == "Many reservation requests"))
+    then
+    	System.out.println("Many reservation requests" );
+        insert(new SuspiciousReservationEvent($username, "Many reservation requests"));
+end

@@ -1,0 +1,70 @@
+package com.main
+
+import com.project.sellerapp.dto.*;
+import java.util.List;
+import java.util.Set;
+import java.util.Date;
+import com.project.sellerapp.helpers.Utility
+
+
+rule "Regular Guest"
+	agenda-group "regular_guest"
+	no-loop true
+    when
+        $u: RegisteredUserDTO($ts: tickets)
+        $reservation: TicketsDTO($id: skiResort.getId())
+        accumulate(
+			TicketsDTO($t: this, $datum: usingStart, $datum > Utility.minusMonths(new Date(), 36), $resort : skiResort) from $ts,         	
+			
+         	$rezervacije: collectList($t),
+         	$resorts: collectList($resort)
+         )
+         Number($value: intValue >= 3) from accumulate(
+        	SkiResortDTO($s: this, $id == $s.getId()) from $resorts,
+        	count($s)
+        )
+       
+      
+       eval($value >= 3 && $rezervacije.size()>=3)
+    then
+    	modify($reservation){
+    		addPrivilege("REGULAR_GUEST");
+    	}
+    	System.out.println("Stalni posetilac" );
+end
+
+
+rule "Occupancy rate"
+	agenda-group "occupancy_rate"
+	lock-on-active true
+    when
+    	$l: List()
+       	$r: SkiResortDTO($capacity: capacity)
+      
+         Number( $total: intValue ) from accumulate(
+      		TicketsDTO($tick: this, $c: this.getNumberOfUsers()) from $l,         	
+         	sum($c)
+    	)
+
+    then
+    	$r.setOccupacyRate(100*$total/$capacity);
+    	System.out.println("Occupancy rate");      
+end
+
+rule "Add one day"
+	agenda-group "bonus"
+	no-loop true
+	salience $Pvalue
+    when
+        $reservation: TicketsDTO($resort: skiResort, $p: privilege)
+        Number($Pvalue: intValue) from accumulate(
+        	String($ps: this, this.contains("REGULAR_GUEST")) from $p,
+        	count($ps)
+        )
+        
+       eval($Pvalue >= 1 && $resort.getOccupacyRate() <= 60)
+    then
+    	$reservation.incrementUsingEnd();
+    	System.out.println("Produzena karta");
+end
+

@@ -24,12 +24,12 @@ public class TicketUser {
 	@Column(unique = false, nullable = true)
 	private double singleTicketPrice;
 
-	public TicketUser(TicketUserDTO t) {
-		this.id = t.getId();
-		this.userType = t.getUserType();
-		this.counts = t.getCount();
-		this.singleTicketPrice = t.getSingleTicketPrice();
-	}
+//	public TicketUser(TicketUserDTO t) {
+//		this.id = t.getId();
+//		this.userType = t.getUserType();
+//		this.counts = t.getCount();
+//		this.singleTicketPrice = t.getSingleTicketPrice();
+//	}
 	
 	public TicketUser() {
 		super();

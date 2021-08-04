@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sellerapp.dto.Occupancy;
 import com.project.sellerapp.dto.TicketsDTO;
+import com.project.sellerapp.helpers.TicketsMapper;
 import com.project.sellerapp.model.RegisteredUser;
 import com.project.sellerapp.model.Tickets;
 import com.project.sellerapp.model.User;
@@ -91,7 +91,7 @@ public class TicketsController {
 		registeredUser.getTickets().add(created);
 		registeredUserService.save(registeredUser);
 		
-		return new ResponseEntity<>(new TicketsDTO(created), HttpStatus.OK);
+		return new ResponseEntity<>(TicketsMapper.toDto(created), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/occupancy/{id}", method = RequestMethod.POST)
@@ -130,7 +130,7 @@ public class TicketsController {
 	private List<TicketsDTO> toDtoList(Set<Tickets> set){
 		List<TicketsDTO> retVal = new ArrayList<TicketsDTO>();
 		for(Tickets t: set) {
-			TicketsDTO dto = new TicketsDTO(t);
+			TicketsDTO dto = TicketsMapper.toDto(t);
 			retVal.add(dto);
 		}
 		return retVal;

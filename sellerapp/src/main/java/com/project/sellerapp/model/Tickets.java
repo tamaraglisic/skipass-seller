@@ -61,30 +61,33 @@ public class Tickets {
 		super();
 	}
 	
-	public Tickets(TicketsDTO t) {
-		this.id = t.getId();
-		this.skiResort = new SkiResort(t.getSkiResort());
-		this.typeTicket = t.getTypeTicket();
-		this.usingPeriod = t.getUsingPeriod();
-		this.transportType = t.getTransportType();
-		this.usingStart = t.getUsingStart();
-		this.usingEnd = t.getUsingEnd();
-		this.initialPrice = t.getInitialPrice();
-		this.ticketUsers = ticketUsersToEntity(t.getTicketUsers());
-		this.bill = t.getBill();
-	}
+//	public Tickets(TicketsDTO t) {
+//		this.id = t.getId();
+//		this.skiResort = new SkiResort(t.getSkiResort());
+//		this.typeTicket = t.getTypeTicket();
+//		this.usingPeriod = t.getUsingPeriod();
+//		this.transportType = t.getTransportType();
+//		this.usingStart = t.getUsingStart();
+//		this.usingEnd = t.getUsingEnd();
+//		this.initialPrice = t.getInitialPrice();
+//		this.ticketUsers = ticketUsersToEntity(t.getTicketUsers());
+//		this.bill = t.getBill();
+//	}
 	
-	private Set<TicketUser> ticketUsersToEntity(Set<TicketUserDTO> set){
-		Set<TicketUser> retVal = new HashSet<TicketUser>();
-		if(set == null)
-			return retVal;
-		for(TicketUserDTO t: set) {
-			retVal.add(new TicketUser(t));
-		}
-		return retVal;
-	}
-	public Tickets(Long id, SkiResort skiResort, String typeTicket, String usingPeriod, String transportType, Date usingStart,
-			Date usingEnd, double initialPrice, Set<TicketUser> ticketUsers, double bill) {
+//	private Set<TicketUser> ticketUsersToEntity(Set<TicketUserDTO> set){
+//		Set<TicketUser> retVal = new HashSet<TicketUser>();
+//		if(set == null)
+//			return retVal;
+//		for(TicketUserDTO t: set) {
+//			retVal.add(new TicketUser(t));
+//		}
+//		return retVal;
+//	}
+	public Tickets(Long id, SkiResort skiResort, 
+			String typeTicket, String usingPeriod, 
+			String transportType, Date usingStart,
+			Date usingEnd, double initialPrice, 
+			Set<TicketUser> ticketUsers, double bill) {
 		super();
 		this.id = id;
 		this.skiResort = skiResort;

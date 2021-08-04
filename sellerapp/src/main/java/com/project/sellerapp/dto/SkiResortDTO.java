@@ -26,22 +26,39 @@ public class SkiResortDTO {
 	public SkiResortDTO() {
 		super();
 	}
-	public SkiResortDTO(SkiResort ski) {
-		super();
-		this.id = ski.getId();
-		this.name = ski.getName();
-		this.description = ski.getDescription();
-		this.country = ski.getCountry();
-		this.liftPrice = ski.getLiftPrice();
-		this.gondolaPrice = ski.getGondolaPrice();
-		this.seasonStarts = ski.getSeasonStarts();
-		this.seasonEnds = ski.getSeasonEnds();
-		this.groupCount = ski.getGroupCount();
-		this.ticketDeposit = ski.getTicketDeposit();
-		this.capacity = ski.getCapacity();
-		this.active = ski.isActive();
-	}
+//	public SkiResortDTO(SkiResort ski) {
+//		super();
+//		this.id = ski.getId();
+//		this.name = ski.getName();
+//		this.description = ski.getDescription();
+//		this.country = ski.getCountry();
+//		this.liftPrice = ski.getLiftPrice();
+//		this.gondolaPrice = ski.getGondolaPrice();
+//		this.seasonStarts = ski.getSeasonStarts();
+//		this.seasonEnds = ski.getSeasonEnds();
+//		this.groupCount = ski.getGroupCount();
+//		this.ticketDeposit = ski.getTicketDeposit();
+//		this.capacity = ski.getCapacity();
+//		this.active = ski.isActive();
+//	}
 
+	public SkiResortDTO(Long id, String name, String description, String country, double liftPrice, double gondolaPrice,
+			Date seasonStarts, Date seasonEnds, int groupCount, double ticketDeposit, double capacity, boolean active) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.country = country;
+		this.liftPrice = liftPrice;
+		this.gondolaPrice = gondolaPrice;
+		this.seasonStarts = seasonStarts;
+		this.seasonEnds = seasonEnds;
+		this.groupCount = groupCount;
+		this.ticketDeposit = ticketDeposit;
+		this.capacity = capacity;
+		this.active = active;
+	}
+	
 	public SkiResortDTO(Long id, String name) {
 		super();
 		this.id = id;

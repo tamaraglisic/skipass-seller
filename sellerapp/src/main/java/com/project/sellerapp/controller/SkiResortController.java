@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sellerapp.dto.Occupancy;
 import com.project.sellerapp.dto.SkiResortDTO;
+import com.project.sellerapp.helpers.SkiResortMapper;
 import com.project.sellerapp.helpers.Utility;
 import com.project.sellerapp.model.SkiResort;
 import com.project.sellerapp.service.SkiResortService;
@@ -48,7 +49,7 @@ public class SkiResortController {
 		SkiResort resort = skiResortService.findById(id);
 		if(resort == null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<>(new SkiResortDTO(resort), HttpStatus.OK);
+		return new ResponseEntity<>(SkiResortMapper.toDto(resort), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/search/{name}" , method = RequestMethod.GET)
@@ -82,7 +83,7 @@ public class SkiResortController {
 		if(created == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(new SkiResortDTO(created), HttpStatus.OK);
+		return new ResponseEntity<>(SkiResortMapper.toDto(created), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -92,19 +93,19 @@ public class SkiResortController {
 		if(created == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(new SkiResortDTO(created), HttpStatus.OK);
+		return new ResponseEntity<>(SkiResortMapper.toDto(created), HttpStatus.OK);
 	}
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.PUT)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<SkiResortDTO> deleteResort(@PathVariable Long id){
 		
 		SkiResort created = skiResortService.delete(id);
-		return new ResponseEntity<>(new SkiResortDTO(created), HttpStatus.OK);
+		return new ResponseEntity<>(SkiResortMapper.toDto(created), HttpStatus.OK);
 	}
 	private List<SkiResortDTO> toDTOList(List<SkiResort> list){
 		List<SkiResortDTO> retVal = new ArrayList<SkiResortDTO>();
 		for(SkiResort ski: list) {
-			SkiResortDTO dto = new SkiResortDTO(ski);
+			SkiResortDTO dto = SkiResortMapper.toDto(ski);
 			retVal.add(dto);
 		}
 		return retVal;

@@ -24,13 +24,6 @@ public class TicketUserDTO {
 		super();
 	}
 
-	public TicketUserDTO(TicketUser tu) {
-		this.id = tu.getId();
-		this.userType = tu.getUserType();
-		this.count = tu.getCount();
-		this.singleTicketPrice = tu.getSingleTicketPrice();
-	}
-
 	public Long getId() {
 		return id;
 	}

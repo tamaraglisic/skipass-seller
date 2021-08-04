@@ -16,13 +16,13 @@ import com.project.sellerapp.dto.RegisteredUserDTO;
 import com.project.sellerapp.dto.ReservationEvent;
 import com.project.sellerapp.dto.TicketUserDTO;
 import com.project.sellerapp.dto.TicketsDTO;
+import com.project.sellerapp.helpers.TicketsMapper;
 import com.project.sellerapp.model.RegisteredUser;
 import com.project.sellerapp.model.SkiResort;
 import com.project.sellerapp.model.TicketUser;
 import com.project.sellerapp.model.Tickets;
 import com.project.sellerapp.model.User;
 import com.project.sellerapp.repository.SkiResortRepository;
-import com.project.sellerapp.repository.TicketUsersRepository;
 import com.project.sellerapp.repository.TicketsRepository;
 
 @Service
@@ -35,8 +35,6 @@ public class TicketsService {
 	private TicketsRepository ticketsRepository;
 	@Autowired
 	private SkiResortRepository skiResortRepository;
-	@Autowired
-	private TicketUsersRepository ticketUsersRepository;
 
 	@Autowired
 	private RegisteredUserService registeredUserService;
@@ -122,7 +120,7 @@ public class TicketsService {
 	private List<TicketsDTO> toDtoList(List<Tickets> list){
 		List<TicketsDTO> retVal = new ArrayList<TicketsDTO>();
 		for(Tickets t: list) {
-			TicketsDTO dto = new TicketsDTO(t);
+			TicketsDTO dto = TicketsMapper.toDto(t);
 			retVal.add(dto);
 		}
 		return retVal;
@@ -131,7 +129,7 @@ public class TicketsService {
 	private Set<TicketsDTO> toDtoSet(Set<Tickets> list){
 		Set<TicketsDTO> retVal = new HashSet<TicketsDTO>();
 		for(Tickets t: list) {
-			TicketsDTO dto = new TicketsDTO(t);
+			TicketsDTO dto = TicketsMapper.toDto(t);
 			retVal.add(dto);
 		}
 		return retVal;

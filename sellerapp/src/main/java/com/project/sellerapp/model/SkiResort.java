@@ -56,25 +56,27 @@ public class SkiResort {
 	}
 
 
-	public SkiResort(SkiResortDTO sr) {
-		
-		this.id = sr.getId();
-		this.name = sr.getName();
-		this.description = sr.getDescription();
-		this.country = sr.getCountry();
-		this.liftPrice = sr.getLiftPrice();
-		this.gondolaPrice = sr.getGondolaPrice();
-		this.seasonStarts = sr.getSeasonStarts();
-		this.seasonEnds = sr.getSeasonEnds();
-		this.groupCount = sr.getGroupCount();
-		this.ticketDeposit = sr.getTicketDeposit();
-		this.capacity = sr.getCapacity();
-		this.active = sr.isActive();
-		
-	}
+//	public SkiResort(SkiResortDTO sr) {
+//		
+//		this.id = sr.getId();
+//		this.name = sr.getName();
+//		this.description = sr.getDescription();
+//		this.country = sr.getCountry();
+//		this.liftPrice = sr.getLiftPrice();
+//		this.gondolaPrice = sr.getGondolaPrice();
+//		this.seasonStarts = sr.getSeasonStarts();
+//		this.seasonEnds = sr.getSeasonEnds();
+//		this.groupCount = sr.getGroupCount();
+//		this.ticketDeposit = sr.getTicketDeposit();
+//		this.capacity = sr.getCapacity();
+//		this.active = sr.isActive();
+//		
+//	}
 
-	public SkiResort(Long id, String name, String description, String country, double liftPrice, double gondolaPrice,
-			Date seasonStarts, Date seasonEnds, int groupCount, double ticketDeposit, double capacity) {
+	public SkiResort(Long id, String name, String description,
+			String country, double liftPrice, double gondolaPrice,
+			Date seasonStarts, Date seasonEnds, int groupCount,
+			double ticketDeposit, double capacity) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -90,8 +92,10 @@ public class SkiResort {
 	}
 
 
-	public SkiResort(Long id, String name, String description, String country, double liftPrice, double gondolaPrice,
-			Date seasonStarts, Date seasonEnds, int groupCount, double ticketDeposit, double capacity, boolean active) {
+	public SkiResort(Long id, String name, String description,
+			String country, double liftPrice, double gondolaPrice,
+			Date seasonStarts, Date seasonEnds, int groupCount,
+			double ticketDeposit, double capacity, boolean active) {
 		super();
 		this.id = id;
 		this.name = name;

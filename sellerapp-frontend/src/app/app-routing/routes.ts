@@ -7,6 +7,7 @@ import { MyReservationsComponent } from '../pages/reservations/my-reservations/m
 import { ResortCapacityComponent } from '../pages/resort/resort-capacity/resort-capacity.component';
 import { NewReservationComponent } from '../pages/reservations/new-reservation/new-reservation.component';
 import { AllResortsComponent } from '../pages/resort/all-resorts/all-resorts.component';
+import { QuestionnaireComponent } from '../pages/insurance/questionnaire/questionnaire.component';
 
 export const routes :Routes = [
 	// {
@@ -50,6 +51,11 @@ export const routes :Routes = [
 	{
 		path:'home',
 		component: ResortChooserComponent,
+		//canActivate: [LoginGuard]
+	},
+	{
+		path:'insurance-questionnaire',
+		component: QuestionnaireComponent,
 		//canActivate: [LoginGuard]
 	}
 ];

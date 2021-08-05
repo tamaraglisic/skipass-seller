@@ -1,0 +1,113 @@
+<body>
+    <form class="reactiveForm" [formGroup]="insuranceForm" (ngSubmit)="sendQuestionnaire()">
+        <br><br>
+        <div>
+            <br>
+            <mat-label>Company preference: </mat-label>
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Insurance companies</mat-label>
+                <mat-select id="companySelect"  (valueChange)="onSelection($event)" multiple>
+                    <mat-option  *ngFor="let company of companies" id="company{{company.id}}" [value]="company">
+                        {{company.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br> <mat-divider></mat-divider> <br>
+            <mat-label>Insurance budget: </mat-label>
+            <br><br>
+            <mat-radio-group aria-label="Insurance budget" formControlName="insuranceBudget" required>
+                <mat-radio-button style="margin-left: 10px;" value="LOW">Low</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value="MEDIUM">Medium</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value="HIGH">High</mat-radio-button>
+            </mat-radio-group>
+            <br> <mat-divider></mat-divider><br>
+            <mat-label>Equipment: </mat-label>
+            <br><br>
+            <mat-radio-group aria-label="equipment" formControlName="equipment" required>
+                <mat-radio-button style="margin-left: 10px;" value="SKIS">Skis</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value="SKIBOARD">Skiboard</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value="SNOWBOARD">Snowboard</mat-radio-button>
+            </mat-radio-group>
+            <br> <mat-divider></mat-divider><br>
+            <mat-label>Do you use extra equipments like goPro, navigation, etc.</mat-label>
+            <br><br>
+            <mat-radio-group aria-label="Extra equipment" formControlName="extraEquipment" required>
+                <mat-radio-button style="margin-left: 10px;" value='true'>Yes</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value='false'>No</mat-radio-button>
+            </mat-radio-group>
+            <br> <mat-divider></mat-divider><br>
+            <mat-label>Rate your skiing skills: </mat-label>
+            <br><br>
+            <mat-radio-group aria-label="Skiing skills" formControlName="skiingSkills" required>
+                <mat-radio-button style="margin-left: 10px;" value=1>Don't know how to ski</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=2>Beginner</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=3>Recreationalist</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=4>Very good</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=5>Professional</mat-radio-button>
+            </mat-radio-group>
+            <br> <mat-divider></mat-divider><br>
+            <mat-label>What kind of skiing do you like the most?</mat-label>
+            <br><br>
+            <mat-radio-group aria-label="Skiing rides" formControlName="skiingRides" required>
+                <mat-radio-button style="margin-left: 10px;" value=1>Slow skiing</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=2>Moderate skiing</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=3>Fast skiing</mat-radio-button>
+            </mat-radio-group>
+            <br> <mat-divider></mat-divider><br>
+            <mat-label>What kind of ski runs do you like the most?</mat-label>
+            <br><br>
+            <mat-radio-group aria-label="Ski runs" formControlName="skiRuns" required>
+                <mat-radio-button style="margin-left: 10px;" value=1>Very slight slope</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=2>Slight slope</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=3>Moderately steep slope</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=4>Steep slope</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value=5>Very steep slope</mat-radio-button>
+            </mat-radio-group>
+            <br> <mat-divider></mat-divider><br>
+            <mat-label>Choose protective equipment you use</mat-label>
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Protective equipment</mat-label>
+                <mat-select id="protectiveEquipment"  (valueChange)="onEquipmentSelection($event)" multiple>
+                    <mat-option  *ngFor="let eq of protectiveEquipments"  [value]="eq">
+                        {{eq}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br> <mat-divider></mat-divider> <br>
+            
+            <mat-label>Have you ever had an injury due to a fall on a ski run?</mat-label>
+            <br><br>
+            <mat-radio-group aria-label="Ski injuries" formControlName="hadInjuries" required>
+                <mat-radio-button style="margin-left: 10px;" value='true'>Yes</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value='false'>No</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field appearance="fill" *ngIf="insuranceForm.value.hadInjuries === 'true'" style="margin-left: 10px;">
+                <mat-label>Injuries</mat-label>
+                <mat-select id="injurySelect" (valueChange)="onInjurySelection($event)" multiple>
+                    <mat-option  *ngFor="let injury of injuries"  [value]="injury">
+                        {{injury}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br> <mat-divider></mat-divider><br> 
+            <mat-label>Have you ever had any of the following? </mat-label>
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Select</mat-label>
+                <mat-select id="healthSelect"  (valueChange)="onHealthSelection($event)" multiple>
+                    <mat-option  *ngFor="let opt of healthOptions"  [value]="opt">
+                        {{opt}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br> <mat-divider></mat-divider> <br>
+            <mat-dialog-actions align="end">
+                <button id="ticketSubmit" type="submit" mat-raised-button color="success" >Send questionnaire</button>
+            </mat-dialog-actions>
+            <br><br>
+            </div>
+        </form>
+        
+</body>

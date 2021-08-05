@@ -31,13 +31,17 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.loginForm = this.formBuilder.group({
-          username: ['', Validators.required],
-          password: ['', Validators.required]
-      });
+      this.createForm();
 
       // get return url from route parameters or default to '/'
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  createForm(): void {
+    this.loginForm = this.formBuilder.group({
+        username: ['', Validators.required],
+        password: ['', Validators.required]
+    });
   }
 
   // convenience getter for easy access to form fields

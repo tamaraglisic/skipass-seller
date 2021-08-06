@@ -108,11 +108,11 @@ public class SkiResortService {
 	}
 
 	public SkiResort delete(Long id) {
-		SkiResort created = repository.findById(id).orElse(null);
-		if(created != null) {
-			created.setActive(false);
+		SkiResort existing = repository.findById(id).orElse(null);
+		if(existing != null) {
+			existing.setActive(false);
 			System.out.println("set to false");
-			return repository.save(created);
+			return repository.save(existing);
 		}
 		return null;
 	}

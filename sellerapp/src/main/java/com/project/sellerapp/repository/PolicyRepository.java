@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.project.sellerapp.model.Policy;
 
 
-
 @Repository
 public interface PolicyRepository extends JpaRepository<Policy, Long>{
 

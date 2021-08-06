@@ -16,7 +16,7 @@
             <br> <mat-divider></mat-divider> <br>
             <mat-label>Insurance budget: </mat-label>
             <br><br>
-            <mat-radio-group aria-label="Insurance budget" formControlName="insuranceBudget" required>
+            <mat-radio-group aria-label="Insurance budget" formControlName="budget" required>
                 <mat-radio-button style="margin-left: 10px;" value="LOW">Low</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value="MEDIUM">Medium</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value="HIGH">High</mat-radio-button>
@@ -39,7 +39,7 @@
             <br> <mat-divider></mat-divider><br>
             <mat-label>Rate your skiing skills: </mat-label>
             <br><br>
-            <mat-radio-group aria-label="Skiing skills" formControlName="skiingSkills" required>
+            <mat-radio-group aria-label="Skiing skills" formControlName="rateSkiingSkills" required>
                 <mat-radio-button style="margin-left: 10px;" value=1>Don't know how to ski</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value=2>Beginner</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value=3>Recreationalist</mat-radio-button>
@@ -49,7 +49,7 @@
             <br> <mat-divider></mat-divider><br>
             <mat-label>What kind of skiing do you like the most?</mat-label>
             <br><br>
-            <mat-radio-group aria-label="Skiing rides" formControlName="skiingRides" required>
+            <mat-radio-group aria-label="Skiing rides" formControlName="skiingSpeed" required>
                 <mat-radio-button style="margin-left: 10px;" value=1>Slow skiing</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value=2>Moderate skiing</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value=3>Fast skiing</mat-radio-button>
@@ -57,7 +57,7 @@
             <br> <mat-divider></mat-divider><br>
             <mat-label>What kind of ski runs do you like the most?</mat-label>
             <br><br>
-            <mat-radio-group aria-label="Ski runs" formControlName="skiRuns" required>
+            <mat-radio-group aria-label="Ski runs" formControlName="skiSlope" required>
                 <mat-radio-button style="margin-left: 10px;" value=1>Very slight slope</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value=2>Slight slope</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value=3>Moderately steep slope</mat-radio-button>
@@ -79,11 +79,11 @@
             
             <mat-label>Have you ever had an injury due to a fall on a ski run?</mat-label>
             <br><br>
-            <mat-radio-group aria-label="Ski injuries" formControlName="hadInjuries" required>
+            <mat-radio-group aria-label="Ski injuries" formControlName="hadInjury" required>
                 <mat-radio-button style="margin-left: 10px;" value='true'>Yes</mat-radio-button>
                 <mat-radio-button style="margin-left: 10px;" value='false'>No</mat-radio-button>
             </mat-radio-group>
-            <mat-form-field appearance="fill" *ngIf="insuranceForm.value.hadInjuries === 'true'" style="margin-left: 10px;">
+            <mat-form-field appearance="fill" *ngIf="insuranceForm.value.hadInjury === 'true'" style="margin-left: 10px;">
                 <mat-label>Injuries</mat-label>
                 <mat-select id="injurySelect" (valueChange)="onInjurySelection($event)" multiple>
                     <mat-option  *ngFor="let injury of injuries"  [value]="injury">

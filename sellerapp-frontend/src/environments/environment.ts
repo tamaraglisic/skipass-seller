@@ -13,8 +13,10 @@ export const environment = {
   admin:'api/admin',
   registeredUser:'api/registered_user',
   user:'api/user',
-  skiResort:'ski-resort',
-  tickets: 'tickets',
+  skiResort:'api/ski-resort',
+  tickets: 'api/tickets',
+  insuranceCompany: 'api/insurance-company',
+  policy: 'api/policy'
 };
 
 /*

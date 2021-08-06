@@ -5,12 +5,15 @@ public class InsuranceCompanyDTO {
 	private Long id;
 	private String name;
 	private String description;
+	private boolean active;
 	
-	public InsuranceCompanyDTO(Long id, String name, String description) {
+	
+	public InsuranceCompanyDTO(Long id, String name, String description, boolean active) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.active = active;
 	}
 
 	public InsuranceCompanyDTO() {
@@ -39,6 +42,14 @@ public class InsuranceCompanyDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

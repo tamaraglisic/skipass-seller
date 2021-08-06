@@ -34,7 +34,7 @@ import com.project.sellerapp.service.TicketsService;
 
 
 @RestController
-@RequestMapping(value = "/tickets", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/tickets", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TicketsController {
 	
 	private static Logger log = LoggerFactory.getLogger(TicketsController.class);

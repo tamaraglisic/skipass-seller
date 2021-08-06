@@ -18,12 +18,16 @@ public class InsuranceCompany {
 	
 	@Column(unique = false, nullable = false)
 	private String description;
+	
+	@Column(unique = false)
+	private boolean active;
 
-	public InsuranceCompany(Long id, String name, String description) {
+	public InsuranceCompany(Long id, String name, String description, boolean active) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.active = active;
 	}
 
 	public InsuranceCompany() {
@@ -52,6 +56,14 @@ public class InsuranceCompany {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

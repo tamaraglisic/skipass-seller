@@ -50,3 +50,9 @@ insert into users_tickets(registered_user_id, tickets_id) values (2, 2);
 insert into users_tickets(registered_user_id, tickets_id) values (2, 3);
 insert into users_tickets(registered_user_id, tickets_id) values (2, 4);
 insert into users_tickets(registered_user_id, tickets_id) values (2, 5);
+
+insert into insurance_company(name, description, active) values ('UNIQA', 'opis', true);
+insert into insurance_company(name, description, active) values ('Dunav osiguranje', 'opis', true);
+
+insert into insurance_company(name, description, active) values ('DDOR', 'opis', false);
+

@@ -25,7 +25,7 @@ import com.project.sellerapp.model.SkiResort;
 import com.project.sellerapp.service.SkiResortService;
 
 @RestController
-@RequestMapping(value = "/ski-resort", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/ski-resort", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SkiResortController {
 
 	private static Logger log = LoggerFactory.getLogger(TicketsController.class);

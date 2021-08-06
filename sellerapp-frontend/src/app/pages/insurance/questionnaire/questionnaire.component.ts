@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { InsuranceCompany } from 'src/app/core/model/InsuranceCompany';
+import { QuestionnaireData } from 'src/app/core/model/QuestionnaireData';
+import { InsuranceService } from 'src/app/core/services/insurance/insurance.service';
+import { PolicyService } from 'src/app/core/services/policy/policy.service';
 
 @Component({
   selector: 'app-questionnaire',
@@ -10,7 +13,8 @@ import { InsuranceCompany } from 'src/app/core/model/InsuranceCompany';
 export class QuestionnaireComponent implements OnInit {
 
   insuranceForm!: FormGroup;
-  companies: InsuranceCompany[] = [{id:  1, name: 'UNIQA', description: 'osiguranje'}, {id: 2, name: 'Dunav osiguranje', description: 'osiguranje'}];
+  questionnaireData!: QuestionnaireData;
+  companies!: InsuranceCompany[];
   selectedCompanies!: InsuranceCompany[];
   selectedEquipments!: any;
   protectiveEquipments: any[] = ['Helmet','Palm protection', 'Knee protection', 'Buttock protection', 'Back protection', 'Protective jacket'];
@@ -20,28 +24,46 @@ export class QuestionnaireComponent implements OnInit {
   selectedHealth!: any;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private insuranceService: InsuranceService,
+    private policyService: PolicyService
   ) { }
 
   ngOnInit(): void {
     this.createForm();
+    this.insuranceService.getAll().subscribe(
+      res => {
+        this.companies = res.body as InsuranceCompany[];
+       
+      });
   }
 
   createForm(): void {
     this.insuranceForm = this.fb.group({
-      insuranceBudget: [''],
+      budget: [''],
       equipment: [''],
-      skiingSkills: [],
-      skiingRides: [],
-      skiRuns: [],
-      hadInjuries: [],
+      rateSkiingSkills: [],
+      skiingSpeed: [],
+      skiSlope: [],
+      hadInjury: [],
       extraEquipment: [],
   
     });
   }
 
   sendQuestionnaire(): void {
+    this.questionnaireData = this.insuranceForm.value;
+    this.questionnaireData.companyPreferences = this.selectedCompanies;
+    this.questionnaireData.protectiveEquipment = this.selectedEquipments;
+    this.questionnaireData.health = this.selectedHealth;
+    this.questionnaireData.injuries = this.selectedInjuries;
 
+    this.policyService.sendQuestionnaire(this.questionnaireData).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
+    
   }
 
   onSelection(event: any): void{

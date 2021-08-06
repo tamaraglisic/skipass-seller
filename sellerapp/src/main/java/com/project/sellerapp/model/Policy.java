@@ -61,16 +61,19 @@ public class Policy {
 	private boolean rescueExpenses;
 	
 	@Column(unique = false, nullable = false)
-	private boolean skiEquipement;
+	private boolean skiEquipment;
 	
 	@Column(unique = false, nullable = false)
-	private boolean extraEquipement;
+	private boolean extraEquipment;
+	
+	@Column(unique = false, nullable = false)
+	private boolean vip;
 
 	public Policy(Long id, InsuranceCompany insuranceCompany, double price, boolean medicalAssistance,
 			boolean inpatientTreatment, boolean medication, boolean medicalSupplies, boolean orthopaedicAids,
 			boolean transportToHospital, boolean hospitalTreatment, boolean diagnostics, boolean urgentOperations,
 			boolean accidentalDeath, boolean accidentalPermanentDisability, boolean rescueExpenses,
-			boolean skiEquipement, boolean extraEquipement) {
+			boolean skiEquipment, boolean extraEquipment, boolean vip) {
 		super();
 		this.id = id;
 		this.insuranceCompany = insuranceCompany;
@@ -87,8 +90,9 @@ public class Policy {
 		this.accidentalDeath = accidentalDeath;
 		this.accidentalPermanentDisability = accidentalPermanentDisability;
 		this.rescueExpenses = rescueExpenses;
-		this.skiEquipement = skiEquipement;
-		this.extraEquipement = extraEquipement;
+		this.skiEquipment = skiEquipment;
+		this.extraEquipment = extraEquipment;
+		this.vip = vip;
 	}
 
 	public Policy() {
@@ -215,20 +219,28 @@ public class Policy {
 		this.rescueExpenses = rescueExpenses;
 	}
 
-	public boolean isSkiEquipement() {
-		return skiEquipement;
+	public boolean isSkiEquipment() {
+		return skiEquipment;
 	}
 
-	public void setSkiEquipement(boolean skiEquipement) {
-		this.skiEquipement = skiEquipement;
+	public void setSkiEquipment(boolean skiEquipment) {
+		this.skiEquipment = skiEquipment;
 	}
 
-	public boolean isExtraEquipement() {
-		return extraEquipement;
+	public boolean isExtraEquipment() {
+		return extraEquipment;
 	}
 
-	public void setExtraEquipement(boolean extraEquipement) {
-		this.extraEquipement = extraEquipement;
+	public void setExtraEquipment(boolean extraEquipment) {
+		this.extraEquipment = extraEquipment;
+	}
+
+	public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
 	}
 	
 	

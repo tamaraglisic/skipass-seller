@@ -19,7 +19,6 @@ public class PolicyController {
 	@Autowired
 	private PolicyService policyService;
 	
-	
 
 	@RequestMapping(value = "/questionnaire", method = RequestMethod.PUT)
 	//@PreAuthorize("hasRole('REGISTERED_USER')")

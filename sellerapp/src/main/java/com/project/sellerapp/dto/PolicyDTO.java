@@ -1,7 +1,5 @@
 package com.project.sellerapp.dto;
 
-import com.project.sellerapp.model.InsuranceCompany;
-
 public class PolicyDTO {
 	
 	private Long id;
@@ -19,14 +17,15 @@ public class PolicyDTO {
 	private boolean accidentalDeath;
 	private boolean accidentalPermanentDisability;
 	private boolean rescueExpenses;
-	private boolean skiEquipement;
+	private boolean skiEquipment;
 	private boolean extraEquipement;
+	private boolean vip;
 	
 	public PolicyDTO(Long id, InsuranceCompanyDTO insuranceCompany, double price, boolean medicalAssistance,
 			boolean inpatientTreatment, boolean medication, boolean medicalSupplies, boolean orthopaedicAids,
 			boolean transportToHospital, boolean hospitalTreatment, boolean diagnostics, boolean urgentOperations,
 			boolean accidentalDeath, boolean accidentalPermanentDisability, boolean rescueExpenses,
-			boolean skiEquipement, boolean extraEquipement) {
+			boolean skiEquipment, boolean extraEquipement) {
 		super();
 		this.id = id;
 		this.insuranceCompany = insuranceCompany;
@@ -43,7 +42,7 @@ public class PolicyDTO {
 		this.accidentalDeath = accidentalDeath;
 		this.accidentalPermanentDisability = accidentalPermanentDisability;
 		this.rescueExpenses = rescueExpenses;
-		this.skiEquipement = skiEquipement;
+		this.skiEquipment = skiEquipment;
 		this.extraEquipement = extraEquipement;
 	}
 
@@ -171,12 +170,12 @@ public class PolicyDTO {
 		this.rescueExpenses = rescueExpenses;
 	}
 
-	public boolean isSkiEquipement() {
-		return skiEquipement;
+	public boolean isSkiEquipment() {
+		return skiEquipment;
 	}
 
-	public void setSkiEquipement(boolean skiEquipement) {
-		this.skiEquipement = skiEquipement;
+	public void setSkiEquipment(boolean skiEquipment) {
+		this.skiEquipment = skiEquipment;
 	}
 
 	public boolean isExtraEquipement() {
@@ -185,6 +184,14 @@ public class PolicyDTO {
 
 	public void setExtraEquipement(boolean extraEquipement) {
 		this.extraEquipement = extraEquipement;
+	}
+
+	public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
 	}
 	
 	

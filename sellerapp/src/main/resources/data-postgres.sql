@@ -53,6 +53,55 @@ insert into users_tickets(registered_user_id, tickets_id) values (2, 5);
 
 insert into insurance_company(name, description, active) values ('UNIQA', 'opis', true);
 insert into insurance_company(name, description, active) values ('Dunav osiguranje', 'opis', true);
-
 insert into insurance_company(name, description, active) values ('DDOR', 'opis', false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1,				 3450, 		true,				 true,				 true, 			true, 			false, 				true, 				true, 				true, 			true,			 false, 				false, 						false, 			false,			 false,		false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1, 				3950, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			false, 		false, 			false);
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1, 				4890, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			true, 					true, 						true, 			true, 		true,			false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1, 				3950, 		true, 				true,			 	true, 			true, 			false, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			true, 		true,			false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1, 				3150, 		true, 				true,			 	true, 			true, 			false, 			false, 						false, 			true, 			false, 			false, 					false, 						false, 			false, 		false,			false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1,				 4450, 		true,				 true,				 true, 			true, 			false, 				true, 				true, 				true, 			true,			 false, 				false, 						false, 			false,			 false,		true);
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1, 				4950, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			false, 		false, 			true);
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1, 				5890, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			true, 					true, 						true, 			true, 		true,			true);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				1, 				4950, 		true, 				true,			 	true, 			true, 			false, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			true, 		true,			true);
+
+-----
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2,				 3370, 		true,				 true,				 true, 			true, 			false, 				true, 				true, 				true, 			true,			 false, 				false, 						false, 			false,			 false,		false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2, 				3800, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			false, 		false, 			false);
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2, 				4990, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			true, 					true, 						true, 			true, 		true,			false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2, 				3800, 		true, 				true,			 	true, 			true, 			false, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			true, 		true,			false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2, 				2990, 		true, 				true,			 	true, 			true, 			false, 			false, 						false, 			true, 			false, 			false, 					false, 						false, 			false, 		false,			false);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2,				 4100, 		true,				 true,				 true, 			true, 			false, 				true, 				true, 				true, 			true,			 false, 				false, 						false, 			false,			 false,		true);
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2, 				4950, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			false, 		false, 			true);
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2, 				5790, 		true, 				true,			 	true, 			true, 			true, 			true, 						true, 			true, 			true, 			true, 					true, 						true, 			true, 		true,			true);
+
+insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
+values (				2, 				5100, 		true, 				true,			 	true, 			true, 			false, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			true, 		true,			true);
+
 

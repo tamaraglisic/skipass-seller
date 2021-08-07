@@ -62,10 +62,12 @@ public class AuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody UserLoginDTO authenticationRequest,
                                                                     HttpServletResponse response) {
     	try {
+    		System.out.println("logovanje");
     		Authentication authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
                             authenticationRequest.getPassword()));
-           
+    		System.out.println("authentikacija zavrsena");
+
             // Ubaci korisnika u trenutni security kontekst
             SecurityContextHolder.getContext().setAuthentication(authentication);
             
@@ -73,9 +75,11 @@ public class AuthenticationController {
             User user = (User) authentication.getPrincipal();
             User dbUser = userRepository.findByEmail(user.getUsername());
             dbUser.setActive(true);
+    		System.out.println("cuvanje");
             userRepository.save(dbUser);
       
-            
+    		System.out.println("sacuvano");
+
             String jwt = tokenUtils.generateToken(user); // prijavljujemo se na sistem sa email adresom
             int expiresIn = tokenUtils.getExpiredIn();
                     

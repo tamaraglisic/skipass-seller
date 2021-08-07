@@ -47,47 +47,30 @@ public class Tickets {
 	
 	@Column(unique = false, nullable = true)
 	private double initialPrice;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-//	@JoinColumn(name = "ticket_id", nullable = true)
-	private Set<TicketUser> ticketUsers; // TicketUser, count
+	
+	@Column(unique = false, nullable = true)
+	private int numOfChildren;
+	
+	@Column(unique = false, nullable = true)
+	private int numOfAdult;
+	
+	@Column(unique = false, nullable = true)
+	private int numOfSenior;
 	
 	@Column(unique = false, nullable = false)
 	private double bill;
+	
+	@Column(unique = false, nullable = true)
+	private double insuranceBill;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,  mappedBy = "tickets")
+	private Set<PurchasedPolicy> purchasedPolicies;
 
 	
 	
-	public Tickets() {
-		super();
-	}
-	
-//	public Tickets(TicketsDTO t) {
-//		this.id = t.getId();
-//		this.skiResort = new SkiResort(t.getSkiResort());
-//		this.typeTicket = t.getTypeTicket();
-//		this.usingPeriod = t.getUsingPeriod();
-//		this.transportType = t.getTransportType();
-//		this.usingStart = t.getUsingStart();
-//		this.usingEnd = t.getUsingEnd();
-//		this.initialPrice = t.getInitialPrice();
-//		this.ticketUsers = ticketUsersToEntity(t.getTicketUsers());
-//		this.bill = t.getBill();
-//	}
-	
-//	private Set<TicketUser> ticketUsersToEntity(Set<TicketUserDTO> set){
-//		Set<TicketUser> retVal = new HashSet<TicketUser>();
-//		if(set == null)
-//			return retVal;
-//		for(TicketUserDTO t: set) {
-//			retVal.add(new TicketUser(t));
-//		}
-//		return retVal;
-//	}
-	public Tickets(Long id, SkiResort skiResort, 
-			String typeTicket, String usingPeriod, 
-			String transportType, Date usingStart,
-			Date usingEnd, double initialPrice, 
-			Set<TicketUser> ticketUsers, double bill) {
+	public Tickets(Long id, SkiResort skiResort, String typeTicket, String usingPeriod, String transportType,
+			Date usingStart, Date usingEnd, double initialPrice, int numOfChildren, int numOfAdult, int numOfSenior,
+			double bill, double insuranceBill, Set<PurchasedPolicy> purchasedPolicies) {
 		super();
 		this.id = id;
 		this.skiResort = skiResort;
@@ -97,9 +80,36 @@ public class Tickets {
 		this.usingStart = usingStart;
 		this.usingEnd = usingEnd;
 		this.initialPrice = initialPrice;
-		this.ticketUsers = ticketUsers;
+		this.numOfChildren = numOfChildren;
+		this.numOfAdult = numOfAdult;
+		this.numOfSenior = numOfSenior;
+		this.bill = bill;
+		this.insuranceBill = insuranceBill;
+		this.purchasedPolicies = purchasedPolicies;
+	}
+
+	public Tickets(Long id, SkiResort skiResort, String typeTicket, String usingPeriod, String transportType,
+			Date usingStart, Date usingEnd, double initialPrice, int numOfChildren, int numOfAdult, int numOfSenior,
+			double bill) {
+		super();
+		this.id = id;
+		this.skiResort = skiResort;
+		this.typeTicket = typeTicket;
+		this.usingPeriod = usingPeriod;
+		this.transportType = transportType;
+		this.usingStart = usingStart;
+		this.usingEnd = usingEnd;
+		this.initialPrice = initialPrice;
+		this.numOfChildren = numOfChildren;
+		this.numOfAdult = numOfAdult;
+		this.numOfSenior = numOfSenior;
 		this.bill = bill;
 	}
+
+	public Tickets() {
+		super();
+	}
+	
 
 	public Long getId() {
 		return id;
@@ -165,20 +175,52 @@ public class Tickets {
 		this.initialPrice = initialPrice;
 	}
 
-	public Set<TicketUser> getTicketUsers() {
-		return ticketUsers;
-	}
-
-	public void setTicketUsers(Set<TicketUser> ticketUsers) {
-		this.ticketUsers = ticketUsers;
-	}
-
 	public double getBill() {
 		return bill;
 	}
 
 	public void setBill(double bill) {
 		this.bill = bill;
+	}
+
+	public int getNumOfChildren() {
+		return numOfChildren;
+	}
+
+	public void setNumOfChildren(int numOfChildren) {
+		this.numOfChildren = numOfChildren;
+	}
+
+	public int getNumOfAdult() {
+		return numOfAdult;
+	}
+
+	public void setNumOfAdult(int numOfAdult) {
+		this.numOfAdult = numOfAdult;
+	}
+
+	public int getNumOfSenior() {
+		return numOfSenior;
+	}
+
+	public void setNumOfSenior(int numOfSenior) {
+		this.numOfSenior = numOfSenior;
+	}
+
+	public double getInsuranceBill() {
+		return insuranceBill;
+	}
+
+	public void setInsuranceBill(double insuranceBill) {
+		this.insuranceBill = insuranceBill;
+	}
+
+	public Set<PurchasedPolicy> getPurchasedPolicies() {
+		return purchasedPolicies;
+	}
+
+	public void setPurchasedPolicies(Set<PurchasedPolicy> purchasedPolicies) {
+		this.purchasedPolicies = purchasedPolicies;
 	}
 	
 	

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.sellerapp.dto.SkiResortDTO;
 import com.project.sellerapp.model.SkiResort;
-import com.project.sellerapp.model.TicketUser;
 import com.project.sellerapp.model.Tickets;
 import com.project.sellerapp.repository.SkiResortRepository;
 import com.project.sellerapp.repository.TicketsRepository;
@@ -40,9 +39,7 @@ public class SkiResortService {
 		int sum = 0;
 		List<Tickets> tickets = findTicketsByDate(forDate, skiResortId);
 		for(Tickets t: tickets) {
-			for(TicketUser tu: t.getTicketUsers()) {
-				sum = sum + tu.getCount();
-			}
+			sum = sum + t.getNumOfChildren() + t.getNumOfAdult() + t.getNumOfSenior();
 		}
 		SkiResort resort = repository.findById(skiResortId).orElse(null);
 		if(resort != null) {

@@ -62,7 +62,7 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 2, 0);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 0);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -101,7 +101,7 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 2, 0);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 0);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -141,7 +141,7 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 2, 0);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 0);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -173,8 +173,8 @@ public class TicketsServiceUnitTests {
 		}
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 2, 100);
-		TicketUserDTO deca = new TicketUserDTO(1L, "DECA", 3, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
+		TicketUserDTO deca = new TicketUserDTO("DECA", 3, 100);
 		ticketUsers.add(odrasli);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
@@ -208,7 +208,7 @@ public class TicketsServiceUnitTests {
 		}
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 20, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 20, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -244,7 +244,7 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -279,7 +279,7 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -314,7 +314,7 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 20, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 20, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -349,8 +349,8 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 2, 100);
-		TicketUserDTO deca = new TicketUserDTO(2L, "DECA", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
+		TicketUserDTO deca = new TicketUserDTO( "DECA", 2, 100);
 		ticketUsers.add(odrasli);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
@@ -386,7 +386,7 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO deca = new TicketUserDTO(2L, "DECA", 2, 100);
+		TicketUserDTO deca = new TicketUserDTO("DECA", 2, 100);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
 		
@@ -421,7 +421,7 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO deca = new TicketUserDTO(2L, "SENIOR", 2, 100);
+		TicketUserDTO deca = new TicketUserDTO("SENIOR", 2, 100);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
 		
@@ -456,7 +456,7 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(2L, "ODRASLI", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
@@ -491,9 +491,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO(3L, "SENIOR", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO("SENIOR", 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -540,9 +540,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO(3L, "DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -588,9 +588,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO(3L, "DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -649,9 +649,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO(3L, "DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -740,9 +740,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO(1L, "ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO(3L, "DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		

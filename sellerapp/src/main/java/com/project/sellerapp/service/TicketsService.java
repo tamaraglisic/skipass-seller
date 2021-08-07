@@ -19,7 +19,6 @@ import com.project.sellerapp.dto.TicketsDTO;
 import com.project.sellerapp.helpers.TicketsMapper;
 import com.project.sellerapp.model.RegisteredUser;
 import com.project.sellerapp.model.SkiResort;
-import com.project.sellerapp.model.TicketUser;
 import com.project.sellerapp.model.Tickets;
 import com.project.sellerapp.model.User;
 import com.project.sellerapp.repository.SkiResortRepository;
@@ -140,9 +139,7 @@ public class TicketsService {
 		int sum = 0;
 		List<Tickets> tickets = findTicketsByDate(forDate, skiResortId);
 		for(Tickets t: tickets) {
-			for(TicketUser tu: t.getTicketUsers()) {
-				sum = sum + tu.getCount();
-			}
+			sum = sum + t.getNumOfChildren() + t.getNumOfAdult() + t.getNumOfSenior();
 		}
 		SkiResort resort = skiResortRepository.findById(skiResortId).orElse(null);
 		if(resort != null) {
@@ -173,12 +170,19 @@ public class TicketsService {
 		t.setUsingStart(tickets.getUsingStart());
 		t.setUsingEnd(tickets.getUsingEnd());
 		t.setInitialPrice(tickets.getInitialPrice());
-		Set<TicketUser> ticketUser = new HashSet<>();
 		for(TicketUserDTO tu: tickets.getTicketUsers()) {
-			TicketUser tentity = new TicketUser(tu.getUserType(), tu.getCount(), tu.getSingleTicketPrice());
-			ticketUser.add(tentity);
+			switch(tu.getUserType()) {
+			case "DECA":
+				t.setNumOfChildren(tu.getCount());
+				break;
+			case "ODRASLI":
+				t.setNumOfAdult(tu.getCount());
+				break;
+			case "SENIOR":
+				t.setNumOfSenior(tu.getCount());
+				break;
+			}
 		}
-		t.setTicketUsers(ticketUser);
 		t.setBill(tickets.getBill());
 		t = ticketsRepository.save(t);
 		

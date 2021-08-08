@@ -8,6 +8,8 @@ import { ResortCapacityComponent } from '../pages/resort/resort-capacity/resort-
 import { NewReservationComponent } from '../pages/reservations/new-reservation/new-reservation.component';
 import { AllResortsComponent } from '../pages/resort/all-resorts/all-resorts.component';
 import { QuestionnaireComponent } from '../pages/insurance/questionnaire/questionnaire.component';
+import { PolicyComponent } from '../pages/insurance/policy/policy.component';
+import { ErrorUnauthorizedComponent } from '../pages/error/error-unauthorized/error-unauthorized.component';
 
 export const routes :Routes = [
 	// {
@@ -19,6 +21,10 @@ export const routes :Routes = [
 		component: LoginPageComponent,
 		//canActivate: [LoginGuard]
 
+	},
+	{
+		path: 'error-unauthorized',
+		component: ErrorUnauthorizedComponent,
 	},
 	{
 		path: 'ski-resort',
@@ -41,7 +47,8 @@ export const routes :Routes = [
 	{
 		path:'new-reservation',
 		component: NewReservationComponent,
-		canActivate: [LoginGuard]
+		canActivate: [RoleGuard],
+		data: {expectedRoles: 'ROLE_REGISTERED_USER'}
 	},
 	{
 		path:'ski-resorts',
@@ -57,5 +64,11 @@ export const routes :Routes = [
 		path:'insurance-questionnaire',
 		component: QuestionnaireComponent,
 		//canActivate: [LoginGuard]
+	},
+	{
+		path: 'policies',
+		component: PolicyComponent,
+		data: {expectedRoles: 'ROLE_ADMIN'}
+
 	}
 ];

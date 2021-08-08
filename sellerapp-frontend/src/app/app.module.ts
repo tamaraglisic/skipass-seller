@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NavbarNonAuthComponent } from './navbar/navbar-non-auth/navbar-non-auth.component';
 import { InsuranceModule } from './pages/insurance/insurance-module';
 import { AuthModule } from './pages/auth/auth.module';
+import { ErrorModule } from './pages/error/error-module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AuthModule } from './pages/auth/auth.module';
     ReservationsModule,
     MaterialModule,
     InsuranceModule,
+    ErrorModule,
     HttpClientModule,
     SharedModule,
     ToastrModule.forRoot()

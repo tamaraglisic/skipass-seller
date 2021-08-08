@@ -26,7 +26,7 @@ export class RoleGuard implements CanActivate {
         const info = jwt.decodeToken(token);
 
         if (roles.indexOf(info.role) === -1) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/error-unauthorized']);
             return false;
         }
         return true;

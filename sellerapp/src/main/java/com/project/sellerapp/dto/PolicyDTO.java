@@ -18,14 +18,18 @@ public class PolicyDTO {
 	private boolean accidentalPermanentDisability;
 	private boolean rescueExpenses;
 	private boolean skiEquipment;
-	private boolean extraEquipement;
+	private boolean extraEquipment;
 	private boolean vip;
 	
-	public PolicyDTO(Long id, InsuranceCompanyDTO insuranceCompany, double price, boolean medicalAssistance,
-			boolean inpatientTreatment, boolean medication, boolean medicalSupplies, boolean orthopaedicAids,
-			boolean transportToHospital, boolean hospitalTreatment, boolean diagnostics, boolean urgentOperations,
-			boolean accidentalDeath, boolean accidentalPermanentDisability, boolean rescueExpenses,
-			boolean skiEquipment, boolean extraEquipement) {
+	public PolicyDTO(Long id, InsuranceCompanyDTO insuranceCompany, 
+			double price, boolean medicalAssistance,
+			boolean inpatientTreatment, boolean medication,
+			boolean medicalSupplies, boolean orthopaedicAids,
+			boolean transportToHospital, boolean hospitalTreatment,
+			boolean diagnostics, boolean urgentOperations,
+			boolean accidentalDeath, boolean accidentalPermanentDisability,
+			boolean rescueExpenses,
+			boolean skiEquipment, boolean extraEquipment, boolean vip) {
 		super();
 		this.id = id;
 		this.insuranceCompany = insuranceCompany;
@@ -43,7 +47,8 @@ public class PolicyDTO {
 		this.accidentalPermanentDisability = accidentalPermanentDisability;
 		this.rescueExpenses = rescueExpenses;
 		this.skiEquipment = skiEquipment;
-		this.extraEquipement = extraEquipement;
+		this.extraEquipment = extraEquipment;
+		this.vip = vip;
 	}
 
 	public PolicyDTO() {
@@ -178,12 +183,12 @@ public class PolicyDTO {
 		this.skiEquipment = skiEquipment;
 	}
 
-	public boolean isExtraEquipement() {
-		return extraEquipement;
+	public boolean isExtraEquipment() {
+		return extraEquipment;
 	}
 
-	public void setExtraEquipement(boolean extraEquipement) {
-		this.extraEquipement = extraEquipement;
+	public void setExtraEquipment(boolean extraEquipment) {
+		this.extraEquipment = extraEquipment;
 	}
 
 	public boolean isVip() {

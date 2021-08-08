@@ -16,7 +16,8 @@ export const environment = {
   skiResort:'api/ski-resort',
   tickets: 'api/tickets',
   insuranceCompany: 'api/insurance-company',
-  policy: 'api/policy'
+  policy: 'api/policy',
+  purchasedPolicy: 'api/purchased-policy'
 };
 
 /*

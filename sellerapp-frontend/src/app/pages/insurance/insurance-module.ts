@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../material-module';
+import { PolicyComponent } from './policy/policy.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 
 
 @NgModule({
-  declarations: [ QuestionnaireComponent ],
+  declarations: [ QuestionnaireComponent, PolicyComponent],
   imports: [ MaterialModule ],
-  exports: [ QuestionnaireComponent ],
+  exports: [ QuestionnaireComponent, PolicyComponent ],
   providers: []
 })
 

@@ -11,7 +11,8 @@ import { PurchasedPolicyService } from 'src/app/core/services/purchased-policy/p
 export class PolicyComponent implements OnInit {
 
   searchForm!: FormGroup;
-  purchasedPolicy!: PurchasedPolicy;
+  inputForm!: FormGroup;
+  purchased: any = {policy: {}};
 
 
   constructor(
@@ -20,7 +21,8 @@ export class PolicyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createSearchForm()
+    this.createSearchForm();
+    this.createInputForm();
   }
 
   createSearchForm():void{
@@ -29,15 +31,27 @@ export class PolicyComponent implements OnInit {
       });
 
   }
+  createInputForm():void{
+    this.inputForm = this.fb.group({
+      description: ['']
+      });
+
+  }
 
   search(): void {
     if(this.searchForm.value.inputId != ""){
       this.purchasedPolicyService.getOne(this.searchForm.value.inputId).subscribe(
         res =>{
-          console.log(res);
+          this.purchased = res.body as PurchasedPolicy;
+        },
+        err =>{
+          this.purchased = {policy: {}}
         }
       )
     }
   }
 
+  input(): void {
+
+  }
 }

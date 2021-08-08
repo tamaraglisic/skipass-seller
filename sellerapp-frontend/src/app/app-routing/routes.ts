@@ -68,7 +68,7 @@ export const routes :Routes = [
 	{
 		path: 'policies',
 		component: PolicyComponent,
-		data: {expectedRoles: 'ROLE_ADMIN'}
+//		data: {expectedRoles: 'ROLE_ADMIN'}
 
 	}
 ];

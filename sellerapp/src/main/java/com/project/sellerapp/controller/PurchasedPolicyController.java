@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.sellerapp.dto.LoginEvent;
+import com.project.sellerapp.dto.PolicyEvent;
 import com.project.sellerapp.dto.PurchasedPolicyDTO;
 import com.project.sellerapp.dto.QuestionnaireData;
 import com.project.sellerapp.dto.SkiResortDTO;
 import com.project.sellerapp.helpers.SkiResortMapper;
 import com.project.sellerapp.model.SkiResort;
+import com.project.sellerapp.service.KieService;
 import com.project.sellerapp.service.PurchasedPolicyService;
 
 
@@ -30,6 +33,8 @@ public class PurchasedPolicyController {
 
 	@Autowired
 	private PurchasedPolicyService purchasedPolicyService;
+	@Autowired
+    private KieService kieService;
 	
 	@RequestMapping(value = "/{id}" , method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -46,6 +51,12 @@ public class PurchasedPolicyController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Void> usePolicy(@RequestBody String desc, @PathVariable Long id){
 		purchasedPolicyService.usePolicy(desc, id);
+		PurchasedPolicyDTO policy = purchasedPolicyService.findById(id);
+		PolicyEvent event = new PolicyEvent(policy.getTickets().getSkiResort().getName());
+		kieService.getCepSession().insert(event);
+		kieService.getCepSession().getAgenda().getAgendaGroup("injuries").setFocus();
+		kieService.getCepSession().fireAllRules();
+		System.out.println("there was an injury");
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	

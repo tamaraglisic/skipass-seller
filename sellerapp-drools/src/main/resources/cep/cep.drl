@@ -1,6 +1,8 @@
 package cep
 import com.project.sellerapp.dto.LoginEvent
 import com.project.sellerapp.dto.ReservationEvent
+import com.project.sellerapp.dto.PolicyEvent
+
 
 declare SuspiciousUserEvent
     @role(event)
@@ -14,6 +16,13 @@ declare SuspiciousReservationEvent
     @role(event)
     @expires(1m)
     username: String
+    reason: String
+end
+
+declare UsedPolicyEvent
+    @role(event)
+    @expires(24h)
+    skiResort: String
     reason: String
 end
 
@@ -51,4 +60,22 @@ rule "More than 5 reservations requests in a minute"
     then
     	System.out.println("Many reservation requests" );
         insert(new SuspiciousReservationEvent($username, "Many reservation requests"));
+end
+
+rule "More than 10 injuries in a 24 hours at ski resort"
+	agenda-group "injuries"
+	no-loop
+    when
+        $u1: PolicyEvent($skiResort: skiResort)
+        Number(intValue >= 10) from accumulate(
+            $u2: PolicyEvent(
+                this != $u1, 
+                skiResort == $skiResort
+            )over window:time( 24h ),
+            count($u2)
+        )
+        not (UsedPolicyEvent(skiResort == $skiResort, reason == "More than 10 injuries"))
+    then
+    	System.out.println("More than 10 injuries at " + $skiResort + " resort");
+        insert(new UsedPolicyEvent($skiResort, "More than 10 injuries"));
 end

@@ -141,12 +141,16 @@
     
     </div>
 
-    <div style="margin-left: 500px;">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="margin-left: 500px;" *ngIf = "descView">
         <form class="reactiveForm" [formGroup]="inputForm" (ngSubmit)="input()" style="display: block;  margin-left:auto; margin-right:50px;">
             <div class="example-container"> 
-                <mat-form-field class="example-full-width" >
+                <mat-form-field class="example-full-width" style="margin-left: 15px;" appearance="fill" >
                     <mat-label>Reason for using policy:</mat-label>
-                    <textarea  id="description" matInput formControlName="description">
+                    <textarea  id="description" matInput formControlName="description" >
                     </textarea>
                 </mat-form-field>
                 <div style="display: inline-block;">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { PurchasedPolicy } from 'src/app/core/model/PurchasedPolicy';
 import { PurchasedPolicyService } from 'src/app/core/services/purchased-policy/purchased-policy';
 
@@ -13,16 +14,18 @@ export class PolicyComponent implements OnInit {
   searchForm!: FormGroup;
   inputForm!: FormGroup;
   purchased: any = {policy: {}};
+  descView: boolean = false;
+  
 
 
   constructor(
     private fb: FormBuilder,
-    private purchasedPolicyService: PurchasedPolicyService
+    private purchasedPolicyService: PurchasedPolicyService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.createSearchForm();
-    this.createInputForm();
   }
 
   createSearchForm():void{
@@ -33,7 +36,7 @@ export class PolicyComponent implements OnInit {
   }
   createInputForm():void{
     this.inputForm = this.fb.group({
-      description: ['']
+      description: [this.purchased.description]
       });
 
   }
@@ -43,15 +46,24 @@ export class PolicyComponent implements OnInit {
       this.purchasedPolicyService.getOne(this.searchForm.value.inputId).subscribe(
         res =>{
           this.purchased = res.body as PurchasedPolicy;
+          this.descView = true;
+          this.createInputForm();
         },
         err =>{
-          this.purchased = {policy: {}}
+          this.purchased = {policy: {}};
+          this.descView = false;
         }
       )
     }
   }
 
   input(): void {
-
+    if(this.inputForm.value.description != ""){
+      this.purchasedPolicyService.usePolicy(this.inputForm.value.description, this.purchased.id).subscribe(
+        res=>{
+          this.toastr.success('Saved!');
+        }
+      )
+    }
   }
 }

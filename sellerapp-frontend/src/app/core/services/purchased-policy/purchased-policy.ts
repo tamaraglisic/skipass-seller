@@ -32,6 +32,11 @@ export class PurchasedPolicyService {
 
 	}
 
+	usePolicy(description: any, id: any){
+        return this.http.put(`${environment.baseUrl}/${environment.purchasedPolicy}/`+id, description, {headers: this.headers, responseType: 'json'});
+
+	}
+
 	// getAll(): Observable<any> {
 	// 	let queryParams = {};
     //     queryParams = {

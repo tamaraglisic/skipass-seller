@@ -22,4 +22,21 @@ public class PurchasedPolicyService {
 		}
 		return null;
 	}
+
+	public void usePolicy(String desc, Long id) {
+		PurchasedPolicy result = repository.findById(id).orElse(null);
+		if(result!=null) {
+			result.setUsed(true);
+			result.setDescription(desc);
+			repository.save(result);
+		}
+		
+	}
+	
+	public void delete(Long id) {
+		PurchasedPolicy result = repository.findById(id).orElse(null);
+		if (result!= null) {
+			repository.deleteById(id);
+		}
+	}
 }

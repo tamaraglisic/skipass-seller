@@ -44,12 +44,24 @@ export class AllResortsComponent implements OnInit {
 
   }
 
-  search():void{
-    this.skiResortService.search(this.searchForm.value.name).subscribe(
-      res=>{
+  refresh(): void {
+    this.searchForm.value.name="";
+    this.skiResortService.getAll().subscribe(
+      res => {
         this.resorts = res.body as SkiResort[];
-      }
-    )
+       
+      });
+  }
+
+  search():void{
+    console.log("cao")
+    if(this.searchForm.value.name != "") {
+      this.skiResortService.search(this.searchForm.value.name).subscribe(
+        res=>{
+          this.resorts = res.body as SkiResort[];
+        }
+      )
+    }
   }
   checkRole(): void {
 	  const item = localStorage.getItem('user');

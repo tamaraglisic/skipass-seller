@@ -94,21 +94,19 @@ public class TicketsController {
 		return new ResponseEntity<>(TicketsMapper.toDto(created), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/occupancy/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/occupancy/{id}/{day}/{month}/{year}", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<Occupancy> calculateOccupacyRate(@PathVariable Long id, @RequestBody Occupancy o) {
+	public ResponseEntity<Occupancy> calculateOccupacyRate(@PathVariable Long id, @PathVariable int day, @PathVariable int month, @PathVariable int year) {
 		
 		
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-		String inputString2 = o.getForDay();
+		String inputString2 = day + "/" + month + "/" + year;
+		Occupancy o = new Occupancy();
 		try {
 		    Date date2 = myFormat.parse(inputString2);
-		    Calendar cal = Calendar.getInstance(); 
-			cal.setTime(date2); 
-			cal.add(Calendar.DATE, 1);
-			Date nextDay = cal.getTime();
-			double occupacy = ticketsService.calculateOccupacy(nextDay, id);
+			double occupacy = ticketsService.calculateOccupacy(date2, id);
 			o.setPercent(occupacy);
+			o.setForDay(inputString2);
 			return new ResponseEntity<>(o, HttpStatus.OK);
 		} catch (Exception e) {
 		    e.printStackTrace();

@@ -33,7 +33,8 @@ public class Utility {
 		cal.setTime(fromDate); 
 		cal.add(Calendar.DATE, 1);
 		Date nextDay = cal.getTime();
-		return nextDay;
+		Date retVal = new Date(nextDay.getYear(), nextDay.getMonth(), nextDay.getDate(), 0, 0, 0);
+		return retVal;
 	}
 	
 	public static String dateToString(Date convertDate) {

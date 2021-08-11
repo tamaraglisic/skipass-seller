@@ -37,8 +37,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         if (authToken != null) {
             // uzmi username iz tokena
             username = tokenUtils.getUsernameFromToken(authToken);
-            System.out.println(username);
-
             if (username != null) {
                 // uzmi user-a na osnovu username-a
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);

@@ -56,7 +56,7 @@ export class TicketsService {
             observe: 'response',
             params: new HttpParams()
         };
-		return this.http.post(`${environment.baseUrl}/${environment.tickets}/occupancy/`+id, occ, queryParams).pipe(map(res => res));
+		return this.http.get(`${environment.baseUrl}/${environment.tickets}/occupancy/`+id+'/'+occ.forDay, queryParams).pipe(map(res => res));
 	}
 
     delete(id: number): Observable<any> {

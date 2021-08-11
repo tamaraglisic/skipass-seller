@@ -9,6 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { TicketsService } from 'src/app/core/services/tickets/tickets.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-resort-capacity',
@@ -42,11 +43,6 @@ export class ResortCapacityComponent implements OnInit {
           }
       }]
   },
-    // scales: {
-    //     xAxes: [{
-    //       type: 'time',
-    //     }]
-    // },
   responsive: true,
   maintainAspectRatio: false,  
 };
@@ -67,7 +63,8 @@ export class ResortCapacityComponent implements OnInit {
     private ticketsService: TicketsService,
     public datepipe: DatePipe,
     private fb: FormBuilder,
-    private skiResortService: SkiResortService
+    private skiResortService: SkiResortService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -80,7 +77,8 @@ export class ResortCapacityComponent implements OnInit {
       }
     );
 
-    this.skiResortService.getOccupancy(1).subscribe(
+    // for default ski resort {id:0}
+    this.skiResortService.getOccupancy(0).subscribe(
       res => {
         this.occupancy = res.body as Occupancy[];
         console.log(this.occupancy);
@@ -112,7 +110,11 @@ export class ResortCapacityComponent implements OnInit {
   dateChanged(): void{
     if(this.selected){
       let dateeee = this.datepipe.transform(this.form.value.inputDate, 'dd/MM/yyyy');
-      this.occ.forDay = dateeee !==null ? dateeee:"12/10/2020";
+      this.occ.forDay = dateeee !==null ? dateeee:"none";
+      if(this.occ.forDay === "none"){
+        this.toastr.error("Input date");
+        return;
+      }
       this.occ.percent = 0;
       this.ticketsService.getOccupancy(this.selected, this.occ).subscribe(
         res=>{

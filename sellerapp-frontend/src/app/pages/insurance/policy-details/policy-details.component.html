@@ -1,0 +1,124 @@
+<table class="styled-table">
+    <tr>
+        <th>Insurance company</th>
+        <td>{{purchased.policy?.insuranceCompany?.name}}</td>
+
+    </tr>
+    <tr>
+        <th>Ski resort</th>
+        <td>{{purchased.tickets?.skiResort?.name}}</td>
+    </tr>
+    <tr>
+        <th>Using start</th>
+        <td>{{purchased.usingStart | date}}</td>
+    </tr>
+    <tr>
+        <th>Using end</th>
+        <td>{{purchased.usingEnd | date}}</td> 
+    </tr>
+    <tr>
+        <th>Medical assistance</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.medicalAssistance">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.medicalAssistance">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Inpatient treatment</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.inpatientTreatment">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.inpatientTreatment">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Medication</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.medication">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.medication">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Medical supplies</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.medicalSupplies">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.medicalSupplies">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Orthopaedic aids</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.orthopaedicAids">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.orthopaedicAids">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Transport to hospital</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.transportToHospital">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.transportToHospital">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Hospital treatment</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.hospitalTreatment">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.hospitalTreatment">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Diagnostics</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.diagnostics">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.diagnostics">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Urgent operations</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.urgentOperations">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.urgentOperations">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Accidental death</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.accidentalDeath">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.accidentalDeath">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Accidental permanent disability</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.accidentalPermanentDisability">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.accidentalPermanentDisability">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Rescue expenses</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.rescueExpenses">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.rescueExpenses">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Ski equipment</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.skiEquipment">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.skiEquipment">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>Extra equipments</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.extraEquipent">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.extraEquipent">checked</mat-icon>
+        </td>
+    </tr>
+    <tr>
+        <th>VIP</th>
+        <td>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!purchased.policy.vip">clear</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="purchased.policy.vip">checked</mat-icon>
+        </td>
+    </tr>
+</table>

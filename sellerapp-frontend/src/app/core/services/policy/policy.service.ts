@@ -20,16 +20,16 @@ export class PolicyService {
 
 	}
 
-	// getAll(): Observable<any> {
-	// 	let queryParams = {};
-    //     queryParams = {
-    //         headers: this.headers,
-    //         observe: 'response',
-    //         params: new HttpParams()
-    //     };
+	getAll(): Observable<any> {
+		let queryParams = {};
+        queryParams = {
+            headers: this.headers,
+            observe: 'response',
+            params: new HttpParams()
+        };
 
-	// 	return this.http.get(`${environment.baseUrl}/${environment.skiResort}`, queryParams).pipe(map(res => res));
-	// }
+		return this.http.get(`${environment.baseUrl}/${environment.policy}`, queryParams).pipe(map(res => res));
+	}
 
 	// getOccupancy(id: any): Observable<any> {
 

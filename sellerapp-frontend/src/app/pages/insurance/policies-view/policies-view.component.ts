@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Policy } from 'src/app/core/model/Policy';
+import { PolicyService } from 'src/app/core/services/policy/policy.service';
 
 @Component({
   selector: 'app-policies-view',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PoliciesViewComponent implements OnInit {
 
-  constructor() { }
+  policies!: Policy[];
+
+  constructor(
+    private policyService: PolicyService,
+
+  ) { }
 
   ngOnInit(): void {
+    this.policyService.getAll().subscribe(
+      res=>{
+        this.policies = res.body as Policy[];
+      }
+    )
   }
+
+  choosePolicy(id:any): void{
+
+  }
+
+
 
 }

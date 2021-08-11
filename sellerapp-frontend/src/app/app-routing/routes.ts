@@ -10,6 +10,7 @@ import { AllResortsComponent } from '../pages/resort/all-resorts/all-resorts.com
 import { QuestionnaireComponent } from '../pages/insurance/questionnaire/questionnaire.component';
 import { PolicyComponent } from '../pages/insurance/policy/policy.component';
 import { ErrorUnauthorizedComponent } from '../pages/error/error-unauthorized/error-unauthorized.component';
+import { PoliciesViewComponent } from '../pages/insurance/policies-view/policies-view.component';
 
 export const routes :Routes = [
 	// {
@@ -68,6 +69,12 @@ export const routes :Routes = [
 	{
 		path: 'policies',
 		component: PolicyComponent,
+//		data: {expectedRoles: 'ROLE_ADMIN'}
+
+	},
+	{
+		path: 'all-policies',
+		component: PoliciesViewComponent,
 //		data: {expectedRoles: 'ROLE_ADMIN'}
 
 	}

@@ -6,7 +6,7 @@ import com.project.sellerapp.model.InsuranceCompany;
 
 public class QuestionnaireData {
 
-	private ArrayList<InsuranceCompany> companyPreferences;
+	private ArrayList<InsuranceCompanyDTO> companyPreferences;
 	private String budget; // LOW, MEDIUM, HIGH
 	private String equipment; // SKIS, SKIBOARD, SNOWBOARD
 	private boolean extraEquipment;
@@ -19,7 +19,7 @@ public class QuestionnaireData {
 	private ArrayList<String> health;
 	
 	
-	public QuestionnaireData(ArrayList<InsuranceCompany> companyPreferences, String budget, String equipment,
+	public QuestionnaireData(ArrayList<InsuranceCompanyDTO> companyPreferences, String budget, String equipment,
 			boolean extraEquipment, int rateSkiingSkills, int skiingSpeed, int skiSlope,
 			ArrayList<String> protectiveEqipment, boolean hadInjury, ArrayList<String> injuries,
 			ArrayList<String> health) {
@@ -43,12 +43,12 @@ public class QuestionnaireData {
 	}
 
 
-	public ArrayList<InsuranceCompany> getCompanyPreferences() {
+	public ArrayList<InsuranceCompanyDTO> getCompanyPreferences() {
 		return companyPreferences;
 	}
 
 
-	public void setCompanyPreferences(ArrayList<InsuranceCompany> companyPreferences) {
+	public void setCompanyPreferences(ArrayList<InsuranceCompanyDTO> companyPreferences) {
 		this.companyPreferences = companyPreferences;
 	}
 

@@ -2,8 +2,7 @@
 package com.main
 
 
-import com.project.sellerapp.dto.PolicyDTO
-import com.project.sellerapp.dto.QuestionnaireData
+import com.project.sellerapp.dto.*;
 import com.project.sellerapp.helpers.Utility
 import java.util.ArrayList;
 
@@ -62,6 +61,21 @@ rule "Points for high budget 2"
         $p.addPoints(5);    
 end
 
+rule "Points for company preference"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData($companies: companyPreferences, $companies.size() > 0)
+         accumulate(
+			InsuranceCompanyDTO($id: id) from $companies,         	
+         	$ids: collectList($id)
+         )
+        $p: PolicyDTO(insuranceCompany.getId memberOf $ids)
+        
+    then
+    	System.out.println("Company preference");
+        $p.addPoints(3);    
+end
 
 //rule "Points for low budget"
 //	agenda-group "ranking"

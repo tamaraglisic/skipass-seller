@@ -17,6 +17,7 @@ public class PolicyMapper {
 				entity.isDiagnostics(), entity.isUrgentOperations(), entity.isAccidentalDeath(),
 				entity.isAccidentalPermanentDisability(), entity.isRescueExpenses(), entity.isSkiEquipment(),
 				entity.isExtraEquipment(), entity.isVip());
+		dto.setPoints(0);
 		return dto;
 	}
 	

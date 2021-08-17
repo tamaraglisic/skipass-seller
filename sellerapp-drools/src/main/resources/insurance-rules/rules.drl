@@ -1,0 +1,76 @@
+//created on: Aug 17, 2021
+package com.main
+
+
+import com.project.sellerapp.dto.PolicyDTO
+import com.project.sellerapp.dto.QuestionnaireData
+import com.project.sellerapp.helpers.Utility
+import java.util.ArrayList;
+
+rule "Points for low budget"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(budget == "LOW")
+        $p: PolicyDTO(price < 3000)
+    then
+    	System.out.println("Low budget, 5 points");
+        $p.addPoints(5);    
+end
+
+rule "Points for medium budget"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(budget == "MEDIUM")
+        $p: PolicyDTO(price < 3000)
+    then
+    	System.out.println("Medium budget, 1 point");
+        $p.addPoints(1);    
+end
+
+rule "Points for medium budget 2"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(budget == "MEDIUM")
+        $p: PolicyDTO(price >= 3000, price < 4500)
+    then
+    	System.out.println("Medium budget, 5 points");
+        $p.addPoints(5);    
+end
+
+rule "Points for high budget"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(budget == "HIGH")
+        $p: PolicyDTO(price >= 3000, price < 4500)
+    then
+    	System.out.println("High budget, 1 point");
+        $p.addPoints(1);    
+end
+
+rule "Points for high budget 2"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(budget == "HIGH")
+        $p: PolicyDTO(price >= 4500)
+    then
+    	System.out.println("High budget, 5 points");
+        $p.addPoints(5);    
+end
+
+
+//rule "Points for low budget"
+//	agenda-group "ranking"
+//	lock-on-active true
+//    when
+//        $q: QuestionnaireData()
+//        $p: PolicyDTO()
+//    then
+//    	System.out.println("" );
+//        $p.addPoints(8);    
+//end
+

@@ -26,7 +26,7 @@ public class PolicyController {
 	@RequestMapping(value = "/questionnaire", method = RequestMethod.PUT)
 	//@PreAuthorize("hasRole('REGISTERED_USER')")
     public ResponseEntity<Void> proceedQuestionnaire(@RequestBody QuestionnaireData questionnaireData) {
-		
+		List<PolicyDTO> retVal = policyService.proceedQuestionnaire(questionnaireData);
 		return new ResponseEntity<> (HttpStatus.OK);
     }
 	

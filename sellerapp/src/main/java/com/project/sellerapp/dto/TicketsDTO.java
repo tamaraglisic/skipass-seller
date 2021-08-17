@@ -29,6 +29,14 @@ public class TicketsDTO {
 	
 	
 
+	public TicketsDTO(Long id, SkiResortDTO skiResort) {
+		super();
+		this.id = id;
+		this.skiResort = skiResort;
+	}
+
+
+
 	public TicketsDTO(Long id, SkiResortDTO skiResort, String typeTicket, String usingPeriod, String transportType,
 			Date usingStart, Date usingEnd, double initialPrice, Set<TicketUserDTO> ticketUsers, double bill,
 			Set<PurchasedPolicyDTO> purchasedPolicies) {

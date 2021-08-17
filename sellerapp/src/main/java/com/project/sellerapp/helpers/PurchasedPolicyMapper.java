@@ -16,10 +16,11 @@ public class PurchasedPolicyMapper {
 	public static PurchasedPolicyDTO toDto(PurchasedPolicy entity)
 	{
 		PolicyDTO policy = PolicyMapper.toDto(entity.getPolicy());
-		//TicketsDTO tickets = TicketsMapper.toDto(entity.getTickets());
+		//TicketsDTO tickets = new TicketsDTO(entity.getTickets().getId(), SkiResortMapper.toDto(entity.getTickets().getSkiResort()));
 		PurchasedPolicyDTO dto = new PurchasedPolicyDTO(entity.getId(), policy,
 				null, entity.isUsed(), entity.getDescription(), entity.getUsingStart(), entity.getUsingEnd());
 	
+		//dto.setTickets(tickets);
 		return dto;
 	}
 	
@@ -28,10 +29,11 @@ public class PurchasedPolicyMapper {
 
 		Policy policy = PolicyMapper.toEntity(dto.getPolicy());
 		//Tickets tickets = TicketsMapper.toEntity(dto.getTickets());
+		//Tickets tickets = new Tickets(dto.getTickets().getId());
 		PurchasedPolicy entity = new PurchasedPolicy(dto.getId(), policy,
 				null, dto.isUsed(), dto.getDescription(), 
 				dto.getUsingStart(), dto.getUsingEnd());
-		
+		//entity.setTickets(tickets);
 		return entity;
 	}
 	

@@ -68,6 +68,11 @@ public class Tickets {
 
 	
 	
+	public Tickets(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Tickets(Long id, SkiResort skiResort, String typeTicket, String usingPeriod, String transportType,
 			Date usingStart, Date usingEnd, double initialPrice, int numOfChildren, int numOfAdult, int numOfSenior,
 			double bill, double insuranceBill, Set<PurchasedPolicy> purchasedPolicies) {

@@ -14,6 +14,7 @@ public class KieService {
 	
 	private KieSession ruleSession;
 	private KieSession cepSession;
+	private KieSession insuranceRuleSession;
 	
 	@Autowired
 	public KieService(KieContainer kieContainer) {
@@ -28,6 +29,13 @@ public class KieService {
 		return this.ruleSession;
 	}
 	
+	public KieSession getInsuranceRuleSession() {
+		if(this.insuranceRuleSession == null) {
+			this.insuranceRuleSession = kieContainer.newKieSession("insurance-session");
+		}
+		return this.insuranceRuleSession;
+	}
+	
 	public KieSession getCepSession()
 	{
 		if(this.cepSession == null) {
@@ -38,6 +46,11 @@ public class KieService {
 	public void disposeRuleSession() {
 		this.ruleSession.dispose();
         this.ruleSession = null;
+	}
+	
+	public void disposeInsuranceRuleSession() {
+		this.insuranceRuleSession.dispose();
+        this.insuranceRuleSession = null;
 	}
 	
 	public void disposeCepSession() {

@@ -3,6 +3,9 @@
 	<kbase name="rules" packages="rules">
         <ksession name="test-session"/>
     </kbase>
+    <kbase name="insurance-rules" packages="insurance-rules">
+        <ksession name="insurance-session"/>
+    </kbase>
     <kbase name="cepKbase" eventProcessingMode="stream" packages="cep">
         <ksession name="cepSession"/>
     </kbase>

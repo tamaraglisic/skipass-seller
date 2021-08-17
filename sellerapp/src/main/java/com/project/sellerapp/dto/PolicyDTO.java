@@ -20,6 +20,7 @@ public class PolicyDTO {
 	private boolean skiEquipment;
 	private boolean extraEquipment;
 	private boolean vip;
+	private int points;
 	
 	public PolicyDTO(Long id, InsuranceCompanyDTO insuranceCompany, 
 			double price, boolean medicalAssistance,
@@ -198,6 +199,16 @@ public class PolicyDTO {
 	public void setVip(boolean vip) {
 		this.vip = vip;
 	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
 	
-	
+	public void addPoints(int points) {
+		this.points += points;
+	}
 }

@@ -1,7 +1,8 @@
 <br><br>
 
 <div style="margin-left: 15px; margin-right: 30px;">
-    <br>
+    <button (click)="buyNewInsurance()" style="margin-left: 50px;" mat-raised-button>Buy new insurance</button>
+    <br><br>
     <table class="styled-table">
         <thead>
         <tr>         
@@ -23,77 +24,80 @@
             <th>Ski equip.</th>
             <th>Extra equip.</th>
             <th>VIP</th>
-            <th>Choose</th>
+            <th>Remove</th>
         
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let policy of policies">
-            <td>{{policy.insuranceCompany.name}}</td>
-            <td>{{policy.price}}</td>
+        <tr *ngFor="let p of policies">
+            <td>{{p.policy?.insuranceCompany?.name}}</td>
+            <td>{{p.policy?.price}}</td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.medicalAssistance">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.medicalAssistance">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.medicalAssistance">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.medicalAssistance">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.inpatientTreatment">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.inpatientTreatment">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.inpatientTreatment">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.inpatientTreatment">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.medication">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.medication">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.medication">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.medication">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.medicalSupplies">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.medicalSupplies">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.medicalSupplies">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.medicalSupplies">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.orthopaedicAids">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.orthopaedicAids">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.orthopaedicAids">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.orthopaedicAids">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.transportToHospital">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.transportToHospital">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.transportToHospital">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.transportToHospital">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.hospitalTreatment">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.hospitalTreatment">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.hospitalTreatment">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.hospitalTreatment">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.diagnostics">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.diagnostics">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.diagnostics">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.diagnostics">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.urgentOperations">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.urgentOperations">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.urgentOperations">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.urgentOperations">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.accidentalDeath">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.accidentalDeath">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.accidentalDeath">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.accidentalDeath">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.accidentalPermanentDisability">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.accidentalPermanentDisability">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.accidentalPermanentDisability">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.accidentalPermanentDisability">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.rescueExpenses">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.rescueExpenses">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.rescueExpenses">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.rescueExpenses">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.skiEquipment">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.skiEquipment">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.skiEquipment">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.skiEquipment">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.extraEquipement">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.extraEquipement">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.extraEquipement">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.extraEquipement">checked</mat-icon>
             </td>
             <td>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!policy.vip">clear</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="policy.vip">checked</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!p.policy?.vip">clear</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="p.policy?.vip">checked</mat-icon>
             </td>
-            <td>
-                <button  mat-button color="primary" (click)="choosePolicy(policy.id)">Choose</button>
+            <td *ngIf="!compareDates(p.usingStart)"></td>
+            <td *ngIf="compareDates(p.usingStart)">
+                <!-- dva dana pre pocetka moze da otkaze rez-->
+                <button  mat-button color="primary" (click)="removePolicy(p.id)">Remove</button>
             </td>
+           
         </tr>
     </tbody>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { InsuranceCompany } from 'src/app/core/model/InsuranceCompany';
 import { QuestionnaireData } from 'src/app/core/model/QuestionnaireData';
 import { InsuranceService } from 'src/app/core/services/insurance/insurance.service';
@@ -12,6 +13,7 @@ import { PolicyService } from 'src/app/core/services/policy/policy.service';
 })
 export class QuestionnaireComponent implements OnInit {
 
+  ticketsId!: any;
   insuranceForm!: FormGroup;
   questionnaireData!: QuestionnaireData;
   companies!: InsuranceCompany[];
@@ -26,10 +28,13 @@ export class QuestionnaireComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private insuranceService: InsuranceService,
-    private policyService: PolicyService
+    private policyService: PolicyService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.ticketsId = this.route.snapshot.params.id;
+    console.log(this.ticketsId)
     this.createForm();
     this.insuranceService.getAll().subscribe(
       res => {
@@ -61,6 +66,9 @@ export class QuestionnaireComponent implements OnInit {
     this.policyService.sendQuestionnaire(this.questionnaireData).subscribe(
       res => {
         console.log(res);
+
+        // suggested-policies/ticketsId
+        // @Input() policies
       }
     )
     

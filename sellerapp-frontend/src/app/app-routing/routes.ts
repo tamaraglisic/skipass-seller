@@ -11,6 +11,7 @@ import { QuestionnaireComponent } from '../pages/insurance/questionnaire/questio
 import { PolicyComponent } from '../pages/insurance/policy/policy.component';
 import { ErrorUnauthorizedComponent } from '../pages/error/error-unauthorized/error-unauthorized.component';
 import { PoliciesViewComponent } from '../pages/insurance/policies-view/policies-view.component';
+import { SuggestedPoliciesComponent } from '../pages/insurance/suggested-policies/suggested-policies.component';
 
 export const routes :Routes = [
 	// {
@@ -62,7 +63,7 @@ export const routes :Routes = [
 		//canActivate: [LoginGuard]
 	},
 	{
-		path:'insurance-questionnaire',
+		path:'insurance-questionnaire/:id',
 		component: QuestionnaireComponent,
 		//canActivate: [LoginGuard]
 	},
@@ -76,6 +77,18 @@ export const routes :Routes = [
 		path: 'all-policies',
 		component: PoliciesViewComponent,
 //		data: {expectedRoles: 'ROLE_ADMIN'}
+
+	},
+	{
+		path: 'my-policies/:id',
+		component: PoliciesViewComponent,
+//		data: {expectedRoles: 'ROLE_REGISTERED_USER'}
+
+	},
+	{
+		path: 'suggested-policies/:id',
+		component: SuggestedPoliciesComponent,
+//		data: {expectedRoles: 'ROLE_REGISTERED_USER'}
 
 	}
 ];

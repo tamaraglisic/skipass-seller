@@ -26,6 +26,7 @@ import { ErrorModule } from './pages/error/error-module';
     NavbarRegisteredUserComponent,
     NavbarInstructorComponent,
     NavbarNonAuthComponent,
+    
   ],
   imports: [
     BrowserModule,

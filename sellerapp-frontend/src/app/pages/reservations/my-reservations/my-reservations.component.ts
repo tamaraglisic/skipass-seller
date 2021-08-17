@@ -63,10 +63,18 @@ export class MyReservationsComponent implements OnInit {
     
   }
 
+  countPolicies(tickets: Tickets){
+    return tickets.purchasedPolicies?.length;
+  }
+
   compareDates(startDate: any): boolean{
     let currentDate = new Date();
 
    return startDate-currentDate.getTime() > 172800000;
+  }
+
+  buyInsurance(id: any): void {
+    
   }
 
 }

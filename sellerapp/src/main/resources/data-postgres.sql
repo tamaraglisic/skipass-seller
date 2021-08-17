@@ -82,7 +82,7 @@ values (				2, 				5790, 		true, 				true,			 	true, 			true, 			true, 			true, 
 insert into policy(insurance_company_id, price, medical_assistance, inpatient_treatment, medication, medical_supplies, orthopaedic_aids, transport_to_hospital, hospital_treatment, diagnostics, urgent_operations, accidental_death, accidental_permanent_disability, rescue_expenses, ski_equipment, extra_equipment, vip)
 values (				2, 				5100, 		true, 				true,			 	true, 			true, 			false, 			true, 						true, 			true, 			true, 			false, 					false, 						false, 			true, 		true,			true);
 
-insert into purchased_policy (policy_id, tickets_id, used, using_start, using_end) values (2, 1, false, '2021-08-20 00:00:00', '2021-08-26 00:00:00');
+insert into purchased_policy (policy_id, tickets_id, used, using_start, using_end) values (2, 1, false, '2021-08-16 00:00:00', '2021-08-20 00:00:00');
 insert into purchased_policy (policy_id, tickets_id, used, using_start, using_end) values (2, 1, false, '2021-08-20 00:00:00', '2021-08-26 00:00:00');
 insert into purchased_policy (policy_id, tickets_id, used, using_start, using_end) values (2, 1, false, '2021-08-20 00:00:00', '2021-08-26 00:00:00');
 insert into purchased_policy (policy_id, tickets_id, used, using_start, using_end) values (2, 1, false, '2021-08-20 00:00:00', '2021-08-26 00:00:00');

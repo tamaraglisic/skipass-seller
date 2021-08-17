@@ -18,6 +18,7 @@ public class TicketsDTO {
 	private Set<TicketUserDTO> ticketUsers; // TicketUser, count
 	private double bill;
 	private Set<String> privilege; // student or loyalty
+	private Set<PurchasedPolicyDTO> purchasedPolicies;
 	
 	private String regGuest;
 	
@@ -25,9 +26,12 @@ public class TicketsDTO {
 	public TicketsDTO() {
 		super();
 	}
+	
+	
 
-	public TicketsDTO(Long id, SkiResortDTO skiResort, String typeTicket, String usingPeriod, String transportType, Date usingStart,
-			Date usingEnd, double initialPrice, Set<TicketUserDTO> ticketUsers, double bill, Set<String> privilege) {
+	public TicketsDTO(Long id, SkiResortDTO skiResort, String typeTicket, String usingPeriod, String transportType,
+			Date usingStart, Date usingEnd, double initialPrice, Set<TicketUserDTO> ticketUsers, double bill,
+			Set<PurchasedPolicyDTO> purchasedPolicies) {
 		super();
 		this.id = id;
 		this.skiResort = skiResort;
@@ -39,8 +43,24 @@ public class TicketsDTO {
 		this.initialPrice = initialPrice;
 		this.ticketUsers = ticketUsers;
 		this.bill = bill;
-		this.privilege = privilege;
+		this.purchasedPolicies = purchasedPolicies;
 	}
+
+//	public TicketsDTO(Long id, SkiResortDTO skiResort, String typeTicket, String usingPeriod, String transportType, Date usingStart,
+//			Date usingEnd, double initialPrice, Set<TicketUserDTO> ticketUsers, double bill, Set<String> privilege) {
+//		super();
+//		this.id = id;
+//		this.skiResort = skiResort;
+//		this.typeTicket = typeTicket;
+//		this.usingPeriod = usingPeriod;
+//		this.transportType = transportType;
+//		this.usingStart = usingStart;
+//		this.usingEnd = usingEnd;
+//		this.initialPrice = initialPrice;
+//		this.ticketUsers = ticketUsers;
+//		this.bill = bill;
+//		this.privilege = privilege;
+//	}
 
 	public TicketsDTO(Long id, SkiResortDTO skiResort, String typeTicket, String usingPeriod, String transportType,
 			Date usingStart, Date usingEnd, double initialPrice, Set<TicketUserDTO> ticketUsers, double bill) {
@@ -212,6 +232,18 @@ public class TicketsDTO {
 	public void setRegGuest(String regGuest) {
 		this.regGuest = regGuest;
 	}
+
+	public Set<PurchasedPolicyDTO> getPurchasedPolicies() {
+		return purchasedPolicies;
+	}
+
+
+
+	public void setPurchasedPolicies(Set<PurchasedPolicyDTO> purchasedPolicies) {
+		this.purchasedPolicies = purchasedPolicies;
+	}
+
+
 
 	@Override
 	public String toString() {

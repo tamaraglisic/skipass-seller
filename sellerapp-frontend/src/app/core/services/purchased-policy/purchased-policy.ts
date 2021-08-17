@@ -37,6 +37,21 @@ export class PurchasedPolicyService {
 
 	}
 
+	getPoliciesForTickets(id: any):Observable<any> {
+		let queryParams = {};
+        queryParams = {
+            headers: this.headers,
+            observe: 'response',
+            params: new HttpParams()
+        };
+		return this.http.get(`${environment.baseUrl}/${environment.purchasedPolicy}/for-tickets/`+id,  queryParams).pipe(map(res => res));
+
+	}
+
+	delete(id: any){
+        return this.http.delete(`${environment.baseUrl}/${environment.purchasedPolicy}/${id}`, {headers: this.headers, responseType: 'text'});
+
+	}
 	// getAll(): Observable<any> {
 	// 	let queryParams = {};
     //     queryParams = {

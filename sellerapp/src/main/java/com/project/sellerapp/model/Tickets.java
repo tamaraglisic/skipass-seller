@@ -63,7 +63,7 @@ public class Tickets {
 	@Column(unique = false, nullable = true)
 	private double insuranceBill;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,  mappedBy = "tickets")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "tickets")
 	private Set<PurchasedPolicy> purchasedPolicies;
 
 	

@@ -1,3 +1,4 @@
+import { PurchasedPolicy } from "./PurchasedPolicy";
 import { SkiResort } from "./SkiResort";
 import { TicketUser } from "./TicketUser";
 
@@ -13,4 +14,5 @@ export interface Tickets{
     ticketUsers?: TicketUser[];
     bill?: number;
     privilege?: string[];
+    purchasedPolicies?: PurchasedPolicy[];
 }

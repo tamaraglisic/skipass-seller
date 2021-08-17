@@ -3,8 +3,10 @@ package com.project.sellerapp.helpers;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.project.sellerapp.dto.PurchasedPolicyDTO;
 import com.project.sellerapp.dto.TicketUserDTO;
 import com.project.sellerapp.dto.TicketsDTO;
+import com.project.sellerapp.model.PurchasedPolicy;
 import com.project.sellerapp.model.Tickets;
 
 public class TicketsMapper {
@@ -21,10 +23,15 @@ public class TicketsMapper {
 //			}
 //		}
 //	
+		Set<PurchasedPolicyDTO> purchasedPolicies = new HashSet<PurchasedPolicyDTO>();
+		for(PurchasedPolicy p: entity.getPurchasedPolicies()) {
+			purchasedPolicies.add(PurchasedPolicyMapper.toDto(p));
+		}
+		
 		return new TicketsDTO(entity.getId(), SkiResortMapper.toDto(entity.getSkiResort()),
 				entity.getTypeTicket(),entity.getUsingPeriod(), entity.getTransportType(),
 				entity.getUsingStart(), entity.getUsingEnd(), entity.getInitialPrice(),
-				users, entity.getBill());
+				users, entity.getBill(), purchasedPolicies);
 	}
 	
 	public static Tickets toEntity (TicketsDTO dto) {

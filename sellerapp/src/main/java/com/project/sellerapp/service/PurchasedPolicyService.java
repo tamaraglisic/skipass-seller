@@ -1,5 +1,7 @@
 package com.project.sellerapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,18 @@ public class PurchasedPolicyService {
 	public void delete(Long id) {
 		PurchasedPolicy result = repository.findById(id).orElse(null);
 		if (result!= null) {
+//			result.setPolicy(null);
+//			result.setTickets(null);
+//			repository.save(result);
 			repository.deleteById(id);
 		}
+	}
+
+	public List<PurchasedPolicyDTO> findByTicketsId(Long id) {
+		List<PurchasedPolicy> result = repository.findByTicketsId(id);
+		if(result != null) {
+			return PurchasedPolicyMapper.toDtoList(result);
+		}
+		return null;
 	}
 }

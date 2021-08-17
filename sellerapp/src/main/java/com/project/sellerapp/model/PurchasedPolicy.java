@@ -19,12 +19,12 @@ public class PurchasedPolicy {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "policy_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "policy_id", nullable = true)
 	private Policy policy;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "tickets_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "tickets_id", nullable = true)
 	private Tickets tickets;
 	
 	@Column(unique = false, nullable = true)

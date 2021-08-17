@@ -65,7 +65,7 @@ rule "Points for company preference"
 	agenda-group "ranking"
 	lock-on-active true
     when
-        $q: QuestionnaireData($companies: companyPreferences, $companies.size() > 0)
+        $q: QuestionnaireData($companies: companyPreferences, $companies != null, $companies.size() > 0)
          accumulate(
 			InsuranceCompanyDTO($id: id) from $companies,         	
          	$ids: collectList($id)
@@ -75,6 +75,50 @@ rule "Points for company preference"
     then
     	System.out.println("Company preference");
         $p.addPoints(3);    
+end
+
+rule "Points for orthopaedic aids"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(equipment == "SKIS" || equipment == "SKIBOARD")
+        $p: PolicyDTO(orthopaedicAids == true)
+    then
+    	System.out.println("Orthopaedic aids for skiers");
+        $p.addPoints(3);    
+end
+
+rule "Points for accidental death"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(equipment == "SKIS" || equipment == "SKIBOARD")
+        $p: PolicyDTO(accidentalDeath == true)
+    then
+    	System.out.println("Accidental death for skiers");
+        $p.addPoints(1);    
+end
+
+rule "Points for emrgency transport"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(skiSlope == 4 || skiSlope == 5)
+        $p: PolicyDTO(transportToHospital == true)
+    then
+    	System.out.println("Emrgency transport");
+        $p.addPoints(1);    
+end
+
+rule "Points for rescue expenses"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(skiSlope == 5)
+        $p: PolicyDTO(rescueExpenses == true)
+    then
+    	System.out.println("Rescue expenses");
+        $p.addPoints(1);    
 end
 
 //rule "Points for low budget"

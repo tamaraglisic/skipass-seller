@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DataService } from 'src/app/core/services/data-service/data.service';
 import { MaterialModule } from '../material-module';
 import { PoliciesViewComponent } from './policies-view/policies-view.component';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
@@ -11,7 +12,7 @@ import { SuggestedPoliciesComponent } from './suggested-policies/suggested-polic
   declarations: [ SuggestedPoliciesComponent, QuestionnaireComponent, PolicyComponent, PoliciesViewComponent, PolicyDetailsComponent],
   imports: [ MaterialModule ],
   exports: [ SuggestedPoliciesComponent, QuestionnaireComponent, PolicyComponent, PoliciesViewComponent, PolicyDetailsComponent ],
-  providers: []
+  providers: [DataService]
 })
 
 export class InsuranceModule { }

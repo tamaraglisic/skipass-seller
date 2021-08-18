@@ -15,8 +15,14 @@ export class PolicyService {
 		private http: HttpClient
 	) { }
 
-    sendQuestionnaire(questionnaire: any){
-        return this.http.put(`${environment.baseUrl}/${environment.policy}/questionnaire`, questionnaire, {headers: this.headers, responseType: 'json'});
+    sendQuestionnaire(questionnaire: any): Observable<any>{
+		let queryParams = {};
+        queryParams = {
+            headers: this.headers,
+            observe: 'response',
+            params: new HttpParams()
+        };
+        return this.http.put(`${environment.baseUrl}/${environment.policy}/questionnaire`, questionnaire, queryParams).pipe(map(res => res));
 
 	}
 

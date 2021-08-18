@@ -59,6 +59,7 @@ public class TicketsController {
 	        return new ResponseEntity<>(ticketsDto, HttpStatus.OK);
 		}
 		catch(Exception e) {
+			
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
@@ -72,10 +73,29 @@ public class TicketsController {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = ((User) currentUser.getPrincipal()).getEmail();
         registeredUser = registeredUserService.findByEmail(username);
-      //  List<Tickets> tickets = ticketsService.findMyTickets(registeredUser.getId());
         List<TicketsDTO> retVal = toDtoList(registeredUser.getTickets());
+        
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('REGISTERED_USER')")
+	public ResponseEntity<TicketsDTO> getOne(@PathVariable Long id){
+        TicketsDTO retVal = ticketsService.getById(id);
+        
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/num-of-users/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('REGISTERED_USER')")
+	public ResponseEntity<Integer> getNumOfUSers(@PathVariable Long id){
+        TicketsDTO retVal = ticketsService.getById(id);
+        if(retVal != null) {
+        	return new ResponseEntity<>(retVal.getNumberOfUsers(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@PreAuthorize("hasRole('REGISTERED_USER')")
@@ -97,8 +117,6 @@ public class TicketsController {
 	@RequestMapping(value = "/occupancy/{id}/{day}/{month}/{year}", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Occupancy> calculateOccupacyRate(@PathVariable Long id, @PathVariable int day, @PathVariable int month, @PathVariable int year) {
-		
-		
 		SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String inputString2 = day + "/" + month + "/" + year;
 		Occupancy o = new Occupancy();
@@ -111,8 +129,8 @@ public class TicketsController {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);	
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -122,6 +140,7 @@ public class TicketsController {
 		}catch(Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
+		
 		return new ResponseEntity<>("OK", HttpStatus.OK);
 	}
 	
@@ -131,6 +150,7 @@ public class TicketsController {
 			TicketsDTO dto = TicketsMapper.toDto(t);
 			retVal.add(dto);
 		}
+		
 		return retVal;
 	}
 }

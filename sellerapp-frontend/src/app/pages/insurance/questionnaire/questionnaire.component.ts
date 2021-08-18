@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InsuranceCompany } from 'src/app/core/model/InsuranceCompany';
+import { Policy } from 'src/app/core/model/Policy';
 import { QuestionnaireData } from 'src/app/core/model/QuestionnaireData';
+import { DataService } from 'src/app/core/services/data-service/data.service';
 import { InsuranceService } from 'src/app/core/services/insurance/insurance.service';
 import { PolicyService } from 'src/app/core/services/policy/policy.service';
 
@@ -24,12 +26,15 @@ export class QuestionnaireComponent implements OnInit {
   selectedInjuries!: any;
   healthOptions: any[] = ['Fracture','Dislocation', 'Neck/spine injury', 'Head injury','Spine deformity', 'Orthopaedic surgery', 'Hook or knee replacement'];
   selectedHealth!: any;
+  suggestedPolicies!: Policy[];
 
   constructor(
     private fb: FormBuilder,
     private insuranceService: InsuranceService,
     private policyService: PolicyService,
     private route: ActivatedRoute,
+    private router: Router,
+    private dataService: DataService,
   ) { }
 
   ngOnInit(): void {
@@ -65,10 +70,10 @@ export class QuestionnaireComponent implements OnInit {
 
     this.policyService.sendQuestionnaire(this.questionnaireData).subscribe(
       res => {
-        console.log(res);
-
-        // suggested-policies/ticketsId
-        // @Input() policies
+        this.suggestedPolicies = res.body as Policy[];
+        console.log(this.suggestedPolicies);
+        this.dataService.updateRouteData(this.suggestedPolicies);
+        this.router.navigate(['/suggested-policies/'+this.ticketsId])
       }
     )
     

@@ -48,6 +48,10 @@ export class PurchasedPolicyService {
 
 	}
 
+	addNew(purchasedPolicy: any){
+		return this.http.post(`${environment.baseUrl}/${environment.purchasedPolicy}`, purchasedPolicy, {headers: this.headers, responseType: 'json'});
+	}
+
 	delete(id: any){
         return this.http.delete(`${environment.baseUrl}/${environment.purchasedPolicy}/${id}`, {headers: this.headers, responseType: 'text'});
 

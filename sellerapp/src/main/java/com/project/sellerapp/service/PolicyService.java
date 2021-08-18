@@ -1,6 +1,7 @@
 package com.project.sellerapp.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ import com.project.sellerapp.dto.QuestionnaireData;
 import com.project.sellerapp.dto.RegisteredUserDTO;
 import com.project.sellerapp.dto.TicketsDTO;
 import com.project.sellerapp.helpers.PolicyMapper;
+import com.project.sellerapp.helpers.PolicySorter;
 import com.project.sellerapp.helpers.TicketsMapper;
 import com.project.sellerapp.model.Policy;
 import com.project.sellerapp.model.RegisteredUser;
@@ -68,9 +70,12 @@ public class PolicyService {
 		kieService.getInsuranceRuleSession().fireAllRules();
 		kieService.disposeInsuranceRuleSession();
 		
+		Collections.sort(allPolicies, new PolicySorter().reversed());
+		
 		for(PolicyDTO p: allPolicies) {
 			System.out.println(p.getPrice() + " points: " + p.getPoints());
 		}
+		
 		return allPolicies;
 	}
 

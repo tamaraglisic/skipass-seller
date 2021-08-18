@@ -201,5 +201,12 @@ public class TicketsService {
 		}
 		
 	}
+	public TicketsDTO getById(Long id) {
+		Tickets found = ticketsRepository.findById(id).orElse(null);
+		if(found != null) {
+			return TicketsMapper.toDto(found);
+		}
+		return null;
+	}
 	
 }

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sellerapp.dto.PolicyEvent;
 import com.project.sellerapp.dto.PurchasedPolicyDTO;
+import com.project.sellerapp.dto.SkiResortDTO;
+import com.project.sellerapp.helpers.SkiResortMapper;
+import com.project.sellerapp.model.SkiResort;
 import com.project.sellerapp.service.KieService;
 import com.project.sellerapp.service.PurchasedPolicyService;
 
@@ -49,6 +52,15 @@ public class PurchasedPolicyController {
 		
 		return new ResponseEntity<>(policies, HttpStatus.OK);
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
+	public ResponseEntity<Void> addNew(@RequestBody PurchasedPolicyDTO purchased){
+		purchasedPolicyService.create(purchased);
+		
+		return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+	}
+	
 	
 	@RequestMapping(value = "/{id}" , method = RequestMethod.PUT)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

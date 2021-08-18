@@ -49,6 +49,31 @@ export class TicketsService {
 		return this.http.get(`${environment.baseUrl}/${environment.tickets}/my-tickets`, queryParams).pipe(map(res => res));
 	}
 
+    getOne(id: any): Observable<any> {
+
+		let queryParams = {};
+        queryParams = {
+            headers: this.headers,
+            observe: 'response',
+            params: new HttpParams()
+        };
+		return this.http.get(`${environment.baseUrl}/${environment.tickets}/`+id,  queryParams).pipe(map(res => res));
+
+	}
+
+    getNumOfUsers(id: any): Observable<any> {
+
+		let queryParams = {};
+        queryParams = {
+            headers: this.headers,
+            observe: 'response',
+            params: new HttpParams()
+        };
+		return this.http.get(`${environment.baseUrl}/${environment.tickets}/num-of-users/`+id,  queryParams).pipe(map(res => res));
+
+	}
+
+
     getOccupancy(id:any, occ: Occupancy):  Observable<any> {
 		let queryParams = {};
         queryParams = {

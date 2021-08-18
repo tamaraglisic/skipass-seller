@@ -13,7 +13,7 @@ public class QuestionnaireData {
 	private int rateSkiingSkills; // 1-5
 	private int skiingSpeed; // 1-3
 	private int skiSlope; // 1- 5
-	private ArrayList<String> protectiveEqipment;
+	private ArrayList<String> protectiveEquipment;
 	private boolean hadInjury;
 	private ArrayList<String> injuries;
 	private ArrayList<String> health;
@@ -21,7 +21,7 @@ public class QuestionnaireData {
 	
 	public QuestionnaireData(ArrayList<InsuranceCompanyDTO> companyPreferences, String budget, String equipment,
 			boolean extraEquipment, int rateSkiingSkills, int skiingSpeed, int skiSlope,
-			ArrayList<String> protectiveEqipment, boolean hadInjury, ArrayList<String> injuries,
+			ArrayList<String> protectiveEquipment, boolean hadInjury, ArrayList<String> injuries,
 			ArrayList<String> health) {
 		super();
 		this.companyPreferences = companyPreferences;
@@ -31,7 +31,7 @@ public class QuestionnaireData {
 		this.rateSkiingSkills = rateSkiingSkills;
 		this.skiingSpeed = skiingSpeed;
 		this.skiSlope = skiSlope;
-		this.protectiveEqipment = protectiveEqipment;
+		this.protectiveEquipment = protectiveEquipment;
 		this.hadInjury = hadInjury;
 		this.injuries = injuries;
 		this.health = health;
@@ -113,13 +113,13 @@ public class QuestionnaireData {
 	}
 
 
-	public ArrayList<String> getProtectiveEqipment() {
-		return protectiveEqipment;
+	public ArrayList<String> getProtectiveEquipment() {
+		return protectiveEquipment;
 	}
 
 
-	public void setProtectiveEqipment(ArrayList<String> protectiveEqipment) {
-		this.protectiveEqipment = protectiveEqipment;
+	public void sets(ArrayList<String> protectiveEquipment) {
+		this.protectiveEquipment = protectiveEquipment;
 	}
 
 

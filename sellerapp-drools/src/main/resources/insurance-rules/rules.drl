@@ -5,6 +5,7 @@ package com.main
 import com.project.sellerapp.dto.*;
 import com.project.sellerapp.helpers.Utility
 import java.util.ArrayList;
+import java.util.List;
 
 rule "Points for low budget"
 	agenda-group "ranking"
@@ -119,6 +120,137 @@ rule "Points for rescue expenses"
     then
     	System.out.println("Rescue expenses");
         $p.addPoints(1);    
+end
+
+rule "Points for hospital treatment for high speed"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(skiingSpeed == 3)
+        $p: PolicyDTO(hospitalTreatment == true)
+    then
+    	System.out.println("Hospital treatment for those who skiing fast");
+        $p.addPoints(1);    
+end
+
+rule "Points for snowboard beginners"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(rateSkiingSkills <=2 && equipment == "SNOWBOARD")
+        $p: PolicyDTO(inpatientTreatment == true || vip == true)
+    then
+    	System.out.println("Snowboard beginners");
+        $p.addPoints(1);    
+end
+
+rule "Points for beginners on easiest slopes"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(rateSkiingSkills != 0, skiSlope!=0, rateSkiingSkills <=2 && skiSlope <= 2)
+        $p: PolicyDTO(inpatientTreatment == true || vip == true)
+    then
+    	System.out.println("Beginner on easiest slope");
+        $p.addPoints(1);    
+end
+
+rule "Points for extra equipment"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData(extraEquipment == true)
+        $p: PolicyDTO(extraEquipment ==  true)
+    then
+    	System.out.println("Extra equipment");
+        $p.addPoints(1);    
+end
+
+rule "More than 2 protective equipments and high budget"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData($pe: protectiveEquipment, $pe != null, $pe.size() >= 2 && budget == "HIGH")
+        $p: PolicyDTO(skiEquipment ==  true)
+    then
+    	System.out.println("SKi equipment");
+        $p.addPoints(2);    
+end
+
+rule "More than 2 protective equipments"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData($pe: protectiveEquipment, $pe != null, $pe.size()>= 2)
+        $p: PolicyDTO(skiEquipment ==  true)
+    then
+    	System.out.println("SKi equipment");
+        $p.addPoints(1);    
+end
+
+rule "Fracture or dislocation or orthopaedic surgery could require orthopaedic aids"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData("Fracture" memberOf health || "Dislocation" memberOf health || "Orthopaedic surgery" memberOf health)
+        $p: PolicyDTO(orthopaedicAids ==  true)
+    then
+    	System.out.println("Fracture or dislocation or orthopaedic surgery");
+        $p.addPoints(1);    
+end
+
+rule "Hook or knee replacement "
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData("Hook or knee replacement" memberOf health)
+        $p: PolicyDTO(orthopaedicAids ==  true && hospitalTreatment == true)
+    then
+    	System.out.println("Hook or knee replacement");
+        $p.addPoints(1);    
+end
+
+rule "Neck and spine injury could cause permanent disability"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData("Neck/spine injury" memberOf health)
+        $p: PolicyDTO(accidentalPermanentDisability ==  true)
+    then
+    	System.out.println("Neck or spine injury");
+        $p.addPoints(1);    
+end
+
+rule "More than 3 injuries or health problems"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+        $q: QuestionnaireData($healthProblems: health, $healthProblems!= null, $healthProblems.size()>=3)
+        $p: PolicyDTO(urgentOperations ==  true)
+    then
+    	System.out.println("More than 3 injuries or health problems");
+        $p.addPoints(1);    
+end
+
+rule "Add points to policies if user has alredy purchased from that company"
+	agenda-group "ranking"
+	lock-on-active true
+    when
+    	$purchased: List();
+        $p: PolicyDTO($companyId: insuranceCompany.getId())
+        accumulate(
+			PurchasedPolicyDTO($pp: this, $insuranceCompany : policy.getInsuranceCompany()) from $purchased,         	
+         	$companies: collectList($insuranceCompany)
+         )
+         Number($value: intValue) from accumulate(
+        	InsuranceCompanyDTO($i: this, $companyId == $i.getId()) from $companies,
+        	count($i)
+        )
+       
+       eval($value >= 10)
+    then
+    	System.out.println("Favorite insurance company");
+        $p.addPoints($value/10);    
 end
 
 //rule "Points for low budget"

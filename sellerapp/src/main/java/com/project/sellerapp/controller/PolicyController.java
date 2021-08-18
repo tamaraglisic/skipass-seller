@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +25,7 @@ public class PolicyController {
 	
 
 	@RequestMapping(value = "/questionnaire", method = RequestMethod.PUT)
-	//@PreAuthorize("hasRole('REGISTERED_USER')")
+	@PreAuthorize("hasRole('REGISTERED_USER')")
     public ResponseEntity<Void> proceedQuestionnaire(@RequestBody QuestionnaireData questionnaireData) {
 		List<PolicyDTO> retVal = policyService.proceedQuestionnaire(questionnaireData);
 		return new ResponseEntity<> (HttpStatus.OK);

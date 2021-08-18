@@ -22,7 +22,7 @@ export class QuestionnaireComponent implements OnInit {
   protectiveEquipments: any[] = ['Helmet','Palm protection', 'Knee protection', 'Buttock protection', 'Back protection', 'Protective jacket'];
   injuries: any[] = ['Fracture','Dislocation', 'Neck/spine injury', 'Head injury', 'Other'];
   selectedInjuries!: any;
-  healthOptions: any[] = ['Fracture','Dislocation', 'Neck/spine injury', 'Spine deformity', 'Orthopaedic surgery', 'Hook or knee replacement'];
+  healthOptions: any[] = ['Fracture','Dislocation', 'Neck/spine injury', 'Head injury','Spine deformity', 'Orthopaedic surgery', 'Hook or knee replacement'];
   selectedHealth!: any;
 
   constructor(

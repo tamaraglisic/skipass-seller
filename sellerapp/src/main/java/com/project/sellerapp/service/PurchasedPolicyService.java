@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.sellerapp.dto.PolicyDTO;
 import com.project.sellerapp.dto.PurchasedPolicyDTO;
 import com.project.sellerapp.helpers.PurchasedPolicyMapper;
+import com.project.sellerapp.helpers.Utility;
 import com.project.sellerapp.model.Policy;
 import com.project.sellerapp.model.PurchasedPolicy;
 import com.project.sellerapp.model.Tickets;
@@ -73,7 +73,8 @@ public class PurchasedPolicyService {
 		entity.setUsingStart(tickets.getUsingStart());
 		entity.setUsingEnd(tickets.getUsingEnd());
 		entity.setUsed(false);
-		
+		int days = (int)Utility.getDays(tickets.getUsingStart(), tickets.getUsingEnd());
+		tickets.setBill(tickets.getBill() + (policy.getPrice()/3.0)*days);
 		repository.save(entity);
 	}
 }

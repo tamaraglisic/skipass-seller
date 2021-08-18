@@ -48,6 +48,10 @@ public class PurchasedPolicyService {
 	
 	public void delete(Long id) {
 		PurchasedPolicy result = repository.findById(id).orElse(null);
+		int days = (int)Utility.getDays(result.getTickets().getUsingStart(), result.getTickets().getUsingEnd());
+		result.getTickets().setBill(result.getTickets().getBill() - (result.getPolicy().getPrice()/3.0)*days);
+		ticketsRepository.save(result.getTickets());
+		
 		if (result!= null) {
 //			result.setPolicy(null);
 //			result.setTickets(null);

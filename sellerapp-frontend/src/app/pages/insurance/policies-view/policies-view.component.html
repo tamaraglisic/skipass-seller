@@ -94,9 +94,10 @@
             </td>
             <td *ngIf="!compareDates(p.usingStart)"></td>
             <td *ngIf="compareDates(p.usingStart)">
-                <!-- dva dana pre pocetka moze da otkaze rez-->
+                <!-- dva dana pre pocetka moze da otkaze-->
                 <button  mat-button color="primary" (click)="removePolicy(p.id)">Remove</button>
             </td>
+            
            
         </tr>
     </tbody>

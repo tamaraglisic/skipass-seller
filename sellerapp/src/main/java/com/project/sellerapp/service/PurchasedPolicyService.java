@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.sellerapp.dto.PurchasedPolicyDTO;
 import com.project.sellerapp.helpers.PurchasedPolicyMapper;
+import com.project.sellerapp.helpers.TicketsMapper;
 import com.project.sellerapp.helpers.Utility;
 import com.project.sellerapp.model.Policy;
 import com.project.sellerapp.model.PurchasedPolicy;
@@ -30,8 +31,11 @@ public class PurchasedPolicyService {
 	public PurchasedPolicyDTO findById(Long id) {
 
 		PurchasedPolicy result = repository.findById(id).orElse(null);
+		PurchasedPolicyDTO retVal = new PurchasedPolicyDTO();
 		if(result!=null) {
-			return PurchasedPolicyMapper.toDto(result);
+			retVal = PurchasedPolicyMapper.toDto(result);
+			retVal.setTickets(TicketsMapper.toDto(result.getTickets()));
+			return retVal;
 		}
 		return null;
 	}

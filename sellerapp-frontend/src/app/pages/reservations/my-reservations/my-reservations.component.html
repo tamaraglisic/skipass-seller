@@ -23,7 +23,7 @@
             <td>{{res.usingStart | date}}</td>
             <td>{{res.usingEnd | date}}</td>
             <td><a href="/my-policies/{{res.id}}">{{countPolicies(res)}}</a></td>
-            <td>{{res.bill}}</td>
+            <td>{{res.bill | number:'1.0-2'}}</td>
             <td *ngIf="!compareDates(res.usingStart)"></td>
             <td *ngIf="compareDates(res.usingStart)">
                 <!-- dva dana pre pocetka moze da otkaze rez-->

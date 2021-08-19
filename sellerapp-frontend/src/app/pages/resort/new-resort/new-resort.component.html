@@ -5,8 +5,17 @@
             <table class="styled-table">
                 <thead>
                 <tr>         
-                    <th>Edit resort</th>
-                    <th></th>
+                    <th>Add new resort</th>
+                    <th style="text-align: right;">
+                        <mat-dialog-actions>
+                            <button mat-raised-button (click)="cancel()" >
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
+                            </button>
+                            <button  type="submit" mat-raised-button color="success"  id="saveNewResort"(click)="saveChanges()" style="margin-left: 15px;">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">checked</mat-icon>
+                            </button>
+                        </mat-dialog-actions>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -113,10 +122,7 @@
             </tbody>
             </table>
             <br><br>
-            <mat-dialog-actions align="end">
-                <button mat-raised-button (click)="cancel()">Cancel</button>
-                <button type="submit" mat-raised-button color="success" id="saveEditCulturalOffer"(click)="saveChanges()" style="margin-left: 15px;">Save</button>
-            </mat-dialog-actions>
+            
         <br><br>
         </div>
     </form>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { SkiResort } from 'src/app/core/model/SkiResort';
 import { SkiResortService } from 'src/app/core/services/ski-resort/ski-resort.service';
@@ -22,7 +23,7 @@ export class AllResortsComponent implements OnInit {
     private skiResortService: SkiResortService,
     public dialog: MatDialog,
     private fb: FormBuilder,
- 
+    private router: Router,
 
   ) { }
 
@@ -77,12 +78,14 @@ export class AllResortsComponent implements OnInit {
   }
 
   edit(id: any): void {
-    const dialogRef = this.dialog.open(EditResortComponent);
-    dialogRef.componentInstance.resId = id;
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      window.location.reload();
-    });
+    // const dialogRef = this.dialog.open(EditResortComponent);
+    // dialogRef.componentInstance.resId = id;
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    //   window.location.reload();
+    // });
+    this.router.navigate(['/edit-resort/'+id])
+
   }
 
   delete(id: any): void{

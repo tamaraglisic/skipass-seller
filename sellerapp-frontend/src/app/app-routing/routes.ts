@@ -12,6 +12,8 @@ import { PolicyComponent } from '../pages/insurance/policy/policy.component';
 import { ErrorUnauthorizedComponent } from '../pages/error/error-unauthorized/error-unauthorized.component';
 import { PoliciesViewComponent } from '../pages/insurance/policies-view/policies-view.component';
 import { SuggestedPoliciesComponent } from '../pages/insurance/suggested-policies/suggested-policies.component';
+import { EditResortComponent } from '../pages/resort/edit-resort/edit-resort.component';
+import { NewResortComponent } from '../pages/resort/new-resort/new-resort.component';
 
 export const routes :Routes = [
 	// {
@@ -89,6 +91,18 @@ export const routes :Routes = [
 		path: 'suggested-policies/:id',
 		component: SuggestedPoliciesComponent,
 //		data: {expectedRoles: 'ROLE_REGISTERED_USER'}
+
+	},
+	{
+		path: 'edit-resort/:id',
+		component: EditResortComponent,
+		data: {expectedRoles: 'ROLE_ADMIN'}
+
+	},
+	{
+		path: 'new-resort',
+		component: NewResortComponent,
+		data: {expectedRoles: 'ROLE_ADMIN'}
 
 	}
 ];

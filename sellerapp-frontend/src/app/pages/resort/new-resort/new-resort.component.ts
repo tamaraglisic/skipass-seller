@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SkiResort } from 'src/app/core/model/SkiResort';
 import { SkiResortService } from 'src/app/core/services/ski-resort/ski-resort.service';
@@ -19,8 +19,8 @@ export class NewResortComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private skiResortService: SkiResortService,
+    private route: Router,
     private toastr: ToastrService,
-    public dialogRef: MatDialogRef<NewResortComponent>
   ) {
     this.createForm();
   }
@@ -59,12 +59,12 @@ export class NewResortComponent implements OnInit {
         this.loading = false;
         this.toastr.success('Ski resort added!');
         this.form.reset();
-        this.dialogRef.close();
+        this.route.navigate(['/ski-resorts']);
       }
     )
   }
   cancel(): void{
-    this.dialogRef.close();
+    this.route.navigate(['/ski-resorts']);
   }
 
 }

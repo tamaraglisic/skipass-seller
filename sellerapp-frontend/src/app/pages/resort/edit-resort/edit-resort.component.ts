@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SkiResort } from 'src/app/core/model/SkiResort';
 import { SkiResortService } from 'src/app/core/services/ski-resort/ski-resort.service';
@@ -20,12 +21,15 @@ export class EditResortComponent implements OnInit {
     private fb: FormBuilder,
     private skiResortService: SkiResortService,
     private toastr: ToastrService,
-    public dialogRef: MatDialogRef<EditResortComponent>
+    private router: ActivatedRoute,
+    private route: Router,
+    //public dialogRef: MatDialogRef<EditResortComponent>
   ) {
     this.createForm();
   }
 
   ngOnInit(): void {
+    this.resId = this.router.snapshot.params.id;
     this.skiResortService.getOne(this.resId).subscribe(
       res => {
         this.resort = res.body as SkiResort;
@@ -76,12 +80,11 @@ export class EditResortComponent implements OnInit {
         this.loading = false;
         this.toastr.success('Ski resort information saved!');
         this.form.reset();
-        this.dialogRef.close();
+        this.route.navigate(['/ski-resorts']);
       }
     )
   }
   cancel(): void{
-
-    this.dialogRef.close();
+    this.route.navigate(['/ski-resorts']);
   }
 }

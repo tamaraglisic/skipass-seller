@@ -28,12 +28,7 @@ export class NavbarAdminComponent implements OnInit {
   }
 
   newSkiResort(): void{
-    console.log("adding new ski resort")
-    const dialogRef = this.dialog.open(NewResortComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      window.location.reload();
-    });
+   this.router.navigate(['/new-resort']);
   }
 
   signOut(): void{

@@ -62,7 +62,7 @@ rule "More than 5 reservations requests in a minute"
         insert(new SuspiciousReservationEvent($username, "Many reservation requests"));
 end
 
-rule "More than 10 injuries in a 24 hours at ski resort"
+rule "More than 10 injuries in 24 hours at ski resort"
 	agenda-group "injuries"
 	no-loop
     when

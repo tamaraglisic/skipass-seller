@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sellerapp.dto.LoginEvent;
+import com.project.sellerapp.dto.RegisterDataDTO;
 import com.project.sellerapp.dto.UserLoginDTO;
 import com.project.sellerapp.dto.UserTokenStateDTO;
 import com.project.sellerapp.model.User;
@@ -24,6 +25,7 @@ import com.project.sellerapp.repository.UserRepository;
 import com.project.sellerapp.security.TokenUtils;
 import com.project.sellerapp.service.CustomUserDetailsService;
 import com.project.sellerapp.service.KieService;
+import com.project.sellerapp.service.RegisteredUserService;
 
 //Kontroler zaduzen za autentifikaciju korisnika
 @RestController
@@ -35,6 +37,9 @@ public class AuthenticationController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private RegisteredUserService regUserService;
+    
     @Autowired
     private AuthenticationManager authenticationManager;
     
@@ -87,6 +92,13 @@ public class AuthenticationController {
     @RequestMapping(value = "/sign-out", method = RequestMethod.GET)
     public ResponseEntity<?> signOut() throws Exception {   	 
     	SecurityContextHolder.getContext().setAuthentication(null);
+        return new ResponseEntity<>(HttpStatus.OK); 
+    }
+    
+    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+    public ResponseEntity<?> signUp(@RequestBody RegisterDataDTO data) throws Exception {   	 
+    	regUserService.registerUser(data);
+    	
         return new ResponseEntity<>(HttpStatus.OK); 
     }
 

@@ -14,6 +14,7 @@ import { PoliciesViewComponent } from '../pages/insurance/policies-view/policies
 import { SuggestedPoliciesComponent } from '../pages/insurance/suggested-policies/suggested-policies.component';
 import { EditResortComponent } from '../pages/resort/edit-resort/edit-resort.component';
 import { NewResortComponent } from '../pages/resort/new-resort/new-resort.component';
+import { RegistrationPageComponent } from '../pages/auth/registration-page/registration-page.component';
 
 export const routes :Routes = [
 	// {
@@ -23,6 +24,12 @@ export const routes :Routes = [
 	{
 		path: 'login',
 		component: LoginPageComponent,
+		//canActivate: [LoginGuard]
+
+	},
+	{
+		path: 'registration',
+		component: RegistrationPageComponent,
 		//canActivate: [LoginGuard]
 
 	},

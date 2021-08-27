@@ -8,7 +8,6 @@ import { Interceptor } from './interceptors/intercept.service';
 import { MaterialModule } from './pages/material-module';
 import { NavbarAdminComponent } from './navbar/navbar-admin/navbar-admin.component';
 import { NavbarRegisteredUserComponent } from './navbar/navbar-registered-user/navbar-registered-user.component';
-import { NavbarInstructorComponent } from './navbar/navbar-instructor/navbar-instructor.component';
 import { ResortModule } from './pages/resort/resort-module';
 import { ReservationsModule } from './pages/reservations/reservations-module';
 import { ChartsModule } from 'ng2-charts';
@@ -24,7 +23,6 @@ import { ErrorModule } from './pages/error/error-module';
     AppComponent,
     NavbarAdminComponent,
     NavbarRegisteredUserComponent,
-    NavbarInstructorComponent,
     NavbarNonAuthComponent,
     
   ],

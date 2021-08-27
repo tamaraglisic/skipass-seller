@@ -76,14 +76,14 @@ export class NewReservationComponent implements OnInit {
     this.res.usingStart = this.ticketForm.get('usingStart')?.value;
     this.res.usingEnd = this.ticketForm.get('usingEnd')?.value;
     this.res.transportType = this.ticketForm.get('transportType')?.value;
-    this.res.typeTicket = "POJEDINACNA";
+    this.res.typeTicket = "SINGLE";
     this.res.ticketUsers = [];
     if(this.ticketForm.value.adult != 0){
-      this.user = {id: 1, count: this.ticketForm.get('adult')?.value, userType: "ODRASLI", singleTicketPrice: this.skiResort.liftPrice};
+      this.user = {id: 1, count: this.ticketForm.get('adult')?.value, userType: "ADULT", singleTicketPrice: this.skiResort.liftPrice};
       this.res.ticketUsers.push(this.user);
     }
     if(this.ticketForm.value.child != 0){
-      this.user = {id: 2, count: this.ticketForm.get('child')?.value, userType: "DECA", singleTicketPrice: this.skiResort.liftPrice};
+      this.user = {id: 2, count: this.ticketForm.get('child')?.value, userType: "CHILD", singleTicketPrice: this.skiResort.liftPrice};
       this.res.ticketUsers.push(this.user);
     }
     if(this.ticketForm.value.senior != 0){

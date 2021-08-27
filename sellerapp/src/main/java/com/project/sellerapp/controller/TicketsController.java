@@ -2,7 +2,6 @@ package com.project.sellerapp.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -54,6 +53,7 @@ public class TicketsController {
 		
 		try {
 			log.debug("Item request received for: " + ticketsDto.getSkiResort().getName());
+			System.out.println(ticketsDto.getUsingPeriod());
 			double price = ticketsService.getFinalPrice(ticketsDto);
 			System.out.println("Price: " + price);
 	        return new ResponseEntity<>(ticketsDto, HttpStatus.OK);

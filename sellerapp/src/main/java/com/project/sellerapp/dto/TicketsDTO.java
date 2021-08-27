@@ -5,13 +5,17 @@ import java.util.Date;
 import java.util.Set;
 
 import com.project.sellerapp.helpers.Utility;
+import com.project.sellerapp.model.TransportType;
+import com.project.sellerapp.model.TypeTicket;
+import com.project.sellerapp.model.UserType;
+import com.project.sellerapp.model.UsingPeriod;
 public class TicketsDTO {
 
 	private Long id;
 	private SkiResortDTO skiResort;
-	private String typeTicket; // porodicna, grupna, pojedinacna
-	private String usingPeriod; // dnevna, poludnevna, nocn
-	private String transportType; // zicara, gondola, zicara+gondola
+	private TypeTicket typeTicket; // porodicna, grupna, pojedinacna
+	private UsingPeriod usingPeriod; // dnevna, poludnevna, nocn
+	private TransportType transportType; // zicara, gondola, zicara+gondola
 	private Date usingStart;
 	private Date usingEnd;
 	private double initialPrice;
@@ -37,7 +41,7 @@ public class TicketsDTO {
 
 
 
-	public TicketsDTO(Long id, SkiResortDTO skiResort, String typeTicket, String usingPeriod, String transportType,
+	public TicketsDTO(Long id, SkiResortDTO skiResort,  TypeTicket typeTicket, UsingPeriod usingPeriod, TransportType transportType,
 			Date usingStart, Date usingEnd, double initialPrice, Set<TicketUserDTO> ticketUsers, double bill,
 			Set<PurchasedPolicyDTO> purchasedPolicies) {
 		super();
@@ -70,7 +74,7 @@ public class TicketsDTO {
 //		this.privilege = privilege;
 //	}
 
-	public TicketsDTO(Long id, SkiResortDTO skiResort, String typeTicket, String usingPeriod, String transportType,
+	public TicketsDTO(Long id, SkiResortDTO skiResort,  TypeTicket typeTicket, UsingPeriod usingPeriod, TransportType transportType,
 			Date usingStart, Date usingEnd, double initialPrice, Set<TicketUserDTO> ticketUsers, double bill) {
 		super();
 		this.id = id;
@@ -101,29 +105,42 @@ public class TicketsDTO {
 		this.skiResort = skiResort;
 	}
 
-	public String getTypeTicket() {
+
+	public TypeTicket getTypeTicket() {
 		return typeTicket;
 	}
 
-	public void setTypeTicket(String typeTicket) {
+
+
+	public void setTypeTicket(TypeTicket typeTicket) {
 		this.typeTicket = typeTicket;
 	}
 
-	public String getUsingPeriod() {
+
+
+	public UsingPeriod getUsingPeriod() {
 		return usingPeriod;
 	}
 
-	public void setUsingPeriod(String usingPeriod) {
+
+
+	public void setUsingPeriod(UsingPeriod usingPeriod) {
 		this.usingPeriod = usingPeriod;
 	}
 
-	public String getTransportType() {
+
+
+	public TransportType getTransportType() {
 		return transportType;
 	}
 
-	public void setTransportType(String transportType) {
+
+
+	public void setTransportType(TransportType transportType) {
 		this.transportType = transportType;
 	}
+
+
 
 	public Date getUsingStart() {
 		return usingStart;
@@ -189,7 +206,7 @@ public class TicketsDTO {
 		this.bill = this.bill*(100+percent)/100;
 	}
 	
-	public int getUsersCount(String userType) {
+	public int getUsersCount(UserType userType) {
 		int retVal = 0;
 		for(TicketUserDTO tu: this.ticketUsers) {
 			if(tu.getUserType().equals(userType))

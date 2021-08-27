@@ -5,10 +5,8 @@ import java.util.List;
 
 import com.project.sellerapp.dto.PolicyDTO;
 import com.project.sellerapp.dto.PurchasedPolicyDTO;
-import com.project.sellerapp.dto.TicketsDTO;
 import com.project.sellerapp.model.Policy;
 import com.project.sellerapp.model.PurchasedPolicy;
-import com.project.sellerapp.model.Tickets;
 
 public class PurchasedPolicyMapper {
 
@@ -26,12 +24,10 @@ public class PurchasedPolicyMapper {
 	{
 
 		Policy policy = PolicyMapper.toEntity(dto.getPolicy());
-		//Tickets tickets = TicketsMapper.toEntity(dto.getTickets());
-		//Tickets tickets = new Tickets(dto.getTickets().getId());
+		
 		PurchasedPolicy entity = new PurchasedPolicy(dto.getId(), policy,
 				null, dto.isUsed(), dto.getDescription(), 
 				dto.getUsingStart(), dto.getUsingEnd());
-		//entity.setTickets(tickets);
 		return entity;
 	}
 	

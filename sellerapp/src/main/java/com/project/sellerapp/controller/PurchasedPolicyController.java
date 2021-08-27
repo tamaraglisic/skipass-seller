@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sellerapp.dto.PolicyEvent;
 import com.project.sellerapp.dto.PurchasedPolicyDTO;
-import com.project.sellerapp.dto.SkiResortDTO;
-import com.project.sellerapp.helpers.SkiResortMapper;
-import com.project.sellerapp.model.SkiResort;
 import com.project.sellerapp.service.KieService;
 import com.project.sellerapp.service.PurchasedPolicyService;
 

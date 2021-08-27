@@ -26,14 +26,14 @@
                 <mat-radio-group aria-label="Transport type" formControlName="transportType">
                     <mat-radio-button style="margin-left: 10px;" value="LIFT">Lift</mat-radio-button>
                     <mat-radio-button style="margin-left: 10px;" value="GONDOLA">Gondola</mat-radio-button>
-                    <mat-radio-button style="margin-left: 10px;" value="LIFT+GONDOLA">Lift+Gondola</mat-radio-button>
+                    <mat-radio-button style="margin-left: 10px;" value="LIFTGONDOLA">Lift+Gondola</mat-radio-button>
                 </mat-radio-group>
             </td>
             <td>
                 <mat-radio-group aria-label="Ticket using period"  formControlName="usingPeriod" *ngIf="ticketForm.value.transportType === 'LIFT' || ticketForm.value.transportType === 'LIFT+GONDOLA'">
-                    <mat-radio-button style="margin-left: 10px;" value="DNEVNA">Day</mat-radio-button>
-                    <mat-radio-button style="margin-left: 10px;" value="POLUDNEVNA">Half-day</mat-radio-button>
-                    <mat-radio-button style="margin-left: 10px;" value="NOCNA">Night</mat-radio-button>
+                    <mat-radio-button style="margin-left: 10px;" value="DAY">Day</mat-radio-button>
+                    <mat-radio-button style="margin-left: 10px;" value="HALFDAY">Half-day</mat-radio-button>
+                    <mat-radio-button style="margin-left: 10px;" value="NIGHT">Night</mat-radio-button>
                 </mat-radio-group> 
             </td>
         </tr>

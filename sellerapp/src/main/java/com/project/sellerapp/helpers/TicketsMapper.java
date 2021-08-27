@@ -8,24 +8,22 @@ import com.project.sellerapp.dto.TicketUserDTO;
 import com.project.sellerapp.dto.TicketsDTO;
 import com.project.sellerapp.model.PurchasedPolicy;
 import com.project.sellerapp.model.Tickets;
+import com.project.sellerapp.model.UserType;
 
 public class TicketsMapper {
 
 	public static TicketsDTO toDto (Tickets entity) {
 		Set<TicketUserDTO> users = new HashSet<TicketUserDTO>();
-		users.add(new TicketUserDTO("DECA", entity.getNumOfChildren(), 0.0));
-		users.add(new TicketUserDTO("ODRASLI", entity.getNumOfAdult(), 0.0));
-		users.add(new TicketUserDTO("SENIOR", entity.getNumOfSenior(), 0.0));
+		users.add(new TicketUserDTO(UserType.CHILD, entity.getNumOfChildren(), 0.0));
+		users.add(new TicketUserDTO(UserType.ADULT, entity.getNumOfAdult(), 0.0));
+		users.add(new TicketUserDTO(UserType.SENIOR, entity.getNumOfSenior(), 0.0));
 
-//		if(entity.getTicketUsers() != null) {
-//			for(TicketUser t: entity.getTicketUsers()) {
-//				users.add(TicketUserMapper.toDto(t));
-//			}
-//		}
-//	
+
 		Set<PurchasedPolicyDTO> purchasedPolicies = new HashSet<PurchasedPolicyDTO>();
-		for(PurchasedPolicy p: entity.getPurchasedPolicies()) {
-			purchasedPolicies.add(PurchasedPolicyMapper.toDto(p));
+		if(entity.getPurchasedPolicies() != null) {
+			for(PurchasedPolicy p: entity.getPurchasedPolicies()) {
+				purchasedPolicies.add(PurchasedPolicyMapper.toDto(p));
+			}
 		}
 		
 		return new TicketsDTO(entity.getId(), SkiResortMapper.toDto(entity.getSkiResort()),
@@ -42,13 +40,13 @@ public class TicketsMapper {
 		for(TicketUserDTO t: dto.getTicketUsers()) {
 			
 			switch(t.getUserType()) {
-				case "DECA":
+				case CHILD:
 					numOfChildren = t.getCount();
 					break;
-				case "ODRASLI":
+				case ADULT:
 					numOfAdult = t.getCount();
 					break;
-				case "SENIOR":
+				case SENIOR:
 					numOfSenior = t.getCount();
 					break;
 			}

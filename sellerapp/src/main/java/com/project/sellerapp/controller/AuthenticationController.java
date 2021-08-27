@@ -3,9 +3,7 @@ package com.project.sellerapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +22,8 @@ import com.project.sellerapp.dto.UserTokenStateDTO;
 import com.project.sellerapp.model.User;
 import com.project.sellerapp.repository.UserRepository;
 import com.project.sellerapp.security.TokenUtils;
-import com.project.sellerapp.service.AdminService;
 import com.project.sellerapp.service.CustomUserDetailsService;
 import com.project.sellerapp.service.KieService;
-import com.project.sellerapp.service.RegisteredUserService;
 
 //Kontroler zaduzen za autentifikaciju korisnika
 @RestController
@@ -36,11 +32,6 @@ public class AuthenticationController {
 
     @Autowired
     private TokenUtils tokenUtils;
-
-    @Autowired 
-	private AdminService adminService;
-    @Autowired 
-   	private RegisteredUserService regUserService;
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
@@ -49,9 +40,6 @@ public class AuthenticationController {
     
     @Autowired
     private UserRepository userRepository;
-    
-    @Autowired
-	private ApplicationEventPublisher eventPublisher;
   
     @Autowired
     private KieService kieService;

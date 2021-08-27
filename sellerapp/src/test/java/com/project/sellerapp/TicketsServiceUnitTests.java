@@ -22,6 +22,10 @@ import com.project.sellerapp.dto.RegisteredUserDTO;
 import com.project.sellerapp.dto.SkiResortDTO;
 import com.project.sellerapp.dto.TicketUserDTO;
 import com.project.sellerapp.dto.TicketsDTO;
+import com.project.sellerapp.model.TransportType;
+import com.project.sellerapp.model.TypeTicket;
+import com.project.sellerapp.model.UserType;
+import com.project.sellerapp.model.UsingPeriod;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -45,9 +49,9 @@ public class TicketsServiceUnitTests {
     	resort.setLiftPrice(4500);
     	TicketsDTO t = new TicketsDTO();
     	t.setSkiResort(resort);
-    	t.setTypeTicket("POJEDINACNA");
-    	t.setUsingPeriod("POLUDNEVNA");
-    	t.setTransportType("LIFT");
+    	t.setTypeTicket(TypeTicket.SINGLE);
+    	t.setUsingPeriod(UsingPeriod.HALFDAY);
+    	t.setTransportType(TransportType.LIFT);
 		
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -62,12 +66,12 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 0);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 0);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("transport_type").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -84,9 +88,9 @@ public class TicketsServiceUnitTests {
     	resort.setGondolaPrice(1000);
     	TicketsDTO t = new TicketsDTO();
     	t.setSkiResort(resort);
-    	t.setTypeTicket("POJEDINACNA");
-    	t.setUsingPeriod("POLUDNEVNA");
-    	t.setTransportType("GONDOLA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
+    	t.setUsingPeriod(UsingPeriod.HALFDAY);
+    	t.setTransportType(TransportType.GONDOLA);
 		
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -101,12 +105,12 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 0);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 0);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("transport_type").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -124,9 +128,9 @@ public class TicketsServiceUnitTests {
     	resort.setGondolaPrice(1000);
     	TicketsDTO t = new TicketsDTO();
     	t.setSkiResort(resort);
-    	t.setTypeTicket("POJEDINACNA");
-    	t.setUsingPeriod("POLUDNEVNA");
-    	t.setTransportType("LIFT+GONDOLA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
+    	t.setUsingPeriod(UsingPeriod.HALFDAY);
+    	t.setTransportType(TransportType.LIFTGONDOLA);
 		
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -141,12 +145,12 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 0);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 0);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("transport_type").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -160,7 +164,7 @@ public class TicketsServiceUnitTests {
     public void testFamilyTicketType() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("POJEDINACNA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
 		String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
 		try {
@@ -173,20 +177,20 @@ public class TicketsServiceUnitTests {
 		}
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
-		TicketUserDTO deca = new TicketUserDTO("DECA", 3, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 100);
+		TicketUserDTO deca = new TicketUserDTO(UserType.CHILD, 3, 100);
 		ticketUsers.add(odrasli);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
 		
-		t.setUsingPeriod("DNEVNA");
+		t.setUsingPeriod(UsingPeriod.DAY);
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("type_ticket").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
 		
-		assertEquals("PORODICNA", t.getTypeTicket());
+		assertEquals(TypeTicket.FAMILY, t.getTypeTicket());
 		
 		kieSession.dispose();
     }
@@ -195,7 +199,7 @@ public class TicketsServiceUnitTests {
     public void testGroupTicketType() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("POJEDINACNA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
 		String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
 		try {
@@ -208,18 +212,18 @@ public class TicketsServiceUnitTests {
 		}
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 20, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 20, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
-		t.setUsingPeriod("DNEVNA");
+		t.setUsingPeriod(UsingPeriod.DAY);
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("type_ticket").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
 		
-		assertEquals("GRUPNA", t.getTypeTicket());
+		assertEquals(TypeTicket.GROUP, t.getTypeTicket());
 		
 		kieSession.dispose();
     }
@@ -228,8 +232,8 @@ public class TicketsServiceUnitTests {
     public void testHalfDayUsingPeriod() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("POJEDINACNA");
-    	t.setUsingPeriod("POLUDNEVNA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
+    	t.setUsingPeriod(UsingPeriod.HALFDAY);
 		
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -244,12 +248,12 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("using_period").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -263,8 +267,8 @@ public class TicketsServiceUnitTests {
     public void testNightUsingPeriod() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("POJEDINACNA");
-    	t.setUsingPeriod("NOCNA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
+    	t.setUsingPeriod(UsingPeriod.NIGHT);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -279,12 +283,12 @@ public class TicketsServiceUnitTests {
 		
 		
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("using_period").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -298,8 +302,8 @@ public class TicketsServiceUnitTests {
     public void testGroupDiscount() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("GRUPNA");
-    	t.setUsingPeriod("NOCNA");
+    	t.setTypeTicket(TypeTicket.GROUP);
+    	t.setUsingPeriod(UsingPeriod.NIGHT);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -314,12 +318,12 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 20, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 20, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("type_ticket_discount").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -333,8 +337,8 @@ public class TicketsServiceUnitTests {
     public void testFamilyDiscount() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("PORODICNA");
-    	t.setUsingPeriod("NOCNA");
+    	t.setTypeTicket(TypeTicket.FAMILY);
+    	t.setUsingPeriod(UsingPeriod.NIGHT);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -349,14 +353,14 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
-		TicketUserDTO deca = new TicketUserDTO( "DECA", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 100);
+		TicketUserDTO deca = new TicketUserDTO( UserType.CHILD, 2, 100);
 		ticketUsers.add(odrasli);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("type_ticket_discount").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -370,8 +374,8 @@ public class TicketsServiceUnitTests {
     public void testPeriodDiscountChild() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("PORODICNA");
-    	t.setUsingPeriod("NOCNA");
+    	t.setTypeTicket(TypeTicket.FAMILY);
+    	t.setUsingPeriod(UsingPeriod.NIGHT);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -386,12 +390,12 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO deca = new TicketUserDTO("DECA", 2, 100);
+		TicketUserDTO deca = new TicketUserDTO(UserType.CHILD, 2, 100);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("period_discount").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -405,8 +409,8 @@ public class TicketsServiceUnitTests {
     public void testPeriodDiscountSenior() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("PORODICNA");
-    	t.setUsingPeriod("NOCNA");
+    	t.setTypeTicket(TypeTicket.FAMILY);
+    	t.setUsingPeriod(UsingPeriod.NIGHT);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -421,12 +425,12 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO deca = new TicketUserDTO("SENIOR", 2, 100);
+		TicketUserDTO deca = new TicketUserDTO(UserType.SENIOR, 2, 100);
 		ticketUsers.add(deca);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("period_discount").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -440,8 +444,8 @@ public class TicketsServiceUnitTests {
     public void testCalculatingBillNoPrivileges() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("POJEDINACNA");
-    	t.setUsingPeriod("DNEVNA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
+    	t.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -456,12 +460,12 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(100);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 2, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 2, 100);
 		ticketUsers.add(odrasli);
 		t.setTicketUsers(ticketUsers);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("calculating_bill").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -475,8 +479,8 @@ public class TicketsServiceUnitTests {
     public void testStudentAndLoyalty() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("POJEDINACNA");
-    	t.setUsingPeriod("DNEVNA");
+    	t.setTypeTicket(TypeTicket.SINGLE);
+    	t.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -491,9 +495,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO("SENIOR", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO(UserType.SENIOR, 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -503,7 +507,7 @@ public class TicketsServiceUnitTests {
 		
 		t.setPrivilege(privilege);
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("calculating_bill").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -524,8 +528,8 @@ public class TicketsServiceUnitTests {
     public void testStudentFamily() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("PORODICNA");
-    	t.setUsingPeriod("DNEVNA");
+    	t.setTypeTicket(TypeTicket.FAMILY);
+    	t.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -540,9 +544,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO(UserType.CHILD, 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -551,7 +555,7 @@ public class TicketsServiceUnitTests {
 		
 		t.setPrivilege(privilege);
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("calculating_bill").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -572,8 +576,8 @@ public class TicketsServiceUnitTests {
     public void testLoyaltyFamily() {
     	
     	TicketsDTO t = new TicketsDTO();
-    	t.setTypeTicket("PORODICNA");
-    	t.setUsingPeriod("DNEVNA");
+    	t.setTypeTicket(TypeTicket.FAMILY);
+    	t.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -588,9 +592,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO(UserType.CHILD, 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -599,7 +603,7 @@ public class TicketsServiceUnitTests {
 		
 		t.setPrivilege(privilege);
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("calculating_bill").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();
@@ -633,8 +637,8 @@ public class TicketsServiceUnitTests {
 		// jedna kaarta
 		TicketsDTO t = new TicketsDTO();
 		t.setSkiResort(resort);
-    	t.setTypeTicket("PORODICNA");
-    	t.setUsingPeriod("DNEVNA");
+    	t.setTypeTicket(TypeTicket.FAMILY);
+    	t.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -649,9 +653,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO(UserType.CHILD, 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -662,8 +666,8 @@ public class TicketsServiceUnitTests {
 		TicketsDTO t2 = new TicketsDTO();
 		t2.setPrivilege(new HashSet<String>());
 		t2.setSkiResort(resort);
-    	t2.setTypeTicket("PORODICNA");
-    	t2.setUsingPeriod("DNEVNA");
+    	t2.setTypeTicket(TypeTicket.FAMILY);
+    	t2.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString12 = "25 05 2020";
 		String inputString22 = "28 05 2020";
@@ -682,8 +686,8 @@ public class TicketsServiceUnitTests {
 		// karta br tri
 		TicketsDTO t3 = new TicketsDTO();
 		t3.setSkiResort(resort);
-    	t3.setTypeTicket("PORODICNA");
-    	t3.setUsingPeriod("DNEVNA");
+    	t3.setTypeTicket(TypeTicket.FAMILY);
+    	t3.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString13 = "25 05 2021";
 		String inputString23 = "28 05 2021";
@@ -705,7 +709,7 @@ public class TicketsServiceUnitTests {
 		
 		regUser.setTickets(userTickets);
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("regular_guest").setFocus();
 		kieSession.insert(regUser);
 		kieSession.insert(t);
@@ -724,8 +728,8 @@ public class TicketsServiceUnitTests {
 		// jedna kaarta
 		TicketsDTO t = new TicketsDTO();
 		t.setSkiResort(resort);
-    	t.setTypeTicket("PORODICNA");
-    	t.setUsingPeriod("DNEVNA");
+    	t.setTypeTicket(TypeTicket.FAMILY);
+    	t.setUsingPeriod(UsingPeriod.DAY);
   
     	String inputString1 = "25 05 2021";
 		String inputString2 = "28 05 2021";
@@ -740,9 +744,9 @@ public class TicketsServiceUnitTests {
 		
 		t.setBill(0);
 		Set<TicketUserDTO> ticketUsers = new HashSet<>();
-		TicketUserDTO odrasli = new TicketUserDTO("ODRASLI", 5, 100);
+		TicketUserDTO odrasli = new TicketUserDTO(UserType.ADULT, 5, 100);
 		ticketUsers.add(odrasli);
-		TicketUserDTO senior = new TicketUserDTO("DECA", 2, 100);
+		TicketUserDTO senior = new TicketUserDTO(UserType.CHILD, 2, 100);
 		ticketUsers.add(senior);
 		t.setTicketUsers(ticketUsers);
 		
@@ -751,7 +755,7 @@ public class TicketsServiceUnitTests {
 		t.setPrivilege(privilege);
 		
 		
-		KieSession kieSession = kieContainer.newKieSession("test-session");
+		KieSession kieSession = kieContainer.newKieSession("tickets-session");
 		kieSession.getAgenda().getAgendaGroup("bonus").setFocus();
 		kieSession.insert(t);
 		kieSession.fireAllRules();

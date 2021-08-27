@@ -27,9 +27,6 @@ import com.project.sellerapp.repository.TicketsRepository;
 @Service
 public class TicketsService {
 	
-//	private static Logger log = LoggerFactory.getLogger(TicketsService.class);
-//	private final KieContainer kieContainer;
-	
 	@Autowired
 	private TicketsRepository ticketsRepository;
 	@Autowired
@@ -100,7 +97,7 @@ public class TicketsService {
 		
 		List<TicketsDTO> res = toDtoList(findTicketsByDate(nextDay, tickets.getSkiResort().getId()));
 		kieService.getRuleSession().insert(res);
-		//res.forEach(kieSession::insert);
+
 		kieService.getRuleSession().fireAllRules();
 		System.out.println(tickets.getSkiResort().getOccupacyRate());
 		
@@ -172,13 +169,13 @@ public class TicketsService {
 		t.setInitialPrice(tickets.getInitialPrice());
 		for(TicketUserDTO tu: tickets.getTicketUsers()) {
 			switch(tu.getUserType()) {
-			case "DECA":
+			case CHILD:
 				t.setNumOfChildren(tu.getCount());
 				break;
-			case "ODRASLI":
+			case ADULT:
 				t.setNumOfAdult(tu.getCount());
 				break;
-			case "SENIOR":
+			case SENIOR:
 				t.setNumOfSenior(tu.getCount());
 				break;
 			}

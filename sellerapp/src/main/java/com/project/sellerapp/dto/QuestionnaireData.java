@@ -2,7 +2,6 @@ package com.project.sellerapp.dto;
 
 import java.util.ArrayList;
 
-import com.project.sellerapp.model.InsuranceCompany;
 
 public class QuestionnaireData {
 

@@ -50,7 +50,6 @@ public class PolicyService {
         List<PurchasedPolicyDTO> res = new ArrayList<PurchasedPolicyDTO>();
         List<PurchasedPolicyDTO> purchased = new ArrayList<PurchasedPolicyDTO>();
 
-		List<PolicyDTO> retVal = new ArrayList<PolicyDTO>();
 		List<PolicyDTO> allPolicies = findAll();
 
 		kieService.getInsuranceRuleSession().getAgenda().getAgendaGroup("ranking").setFocus();

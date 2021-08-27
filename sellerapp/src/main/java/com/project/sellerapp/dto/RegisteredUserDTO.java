@@ -2,7 +2,6 @@ package com.project.sellerapp.dto;
 
 import java.util.Set;
 
-import com.project.sellerapp.model.Tickets;
 
 public class RegisteredUserDTO {
 	private Set<TicketsDTO> tickets;

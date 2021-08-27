@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sellerapp.dto.InsuranceCompanyDTO;
-import com.project.sellerapp.model.InsuranceCompany;
 import com.project.sellerapp.service.InsuranceCompanyService;
 
 @RestController

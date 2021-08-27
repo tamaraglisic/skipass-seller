@@ -1,12 +1,13 @@
 package com.project.sellerapp.model;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.project.sellerapp.dto.TicketUserDTO;
-import com.project.sellerapp.dto.TicketsDTO;
 
 @Entity
 public class Tickets {
@@ -31,13 +29,16 @@ public class Tickets {
 	private SkiResort skiResort;
 
 	@Column(unique = false, nullable = false)
-	private String typeTicket; // porodicna, grupna, pojedinacna
+	@Enumerated(EnumType.STRING)
+	private TypeTicket typeTicket; // porodicna, grupna, pojedinacna
 	
 	@Column(unique = false, nullable = false)
-	private String usingPeriod; // dnevna, poludnevna, nocna
+	@Enumerated(EnumType.STRING)
+	private UsingPeriod usingPeriod; // dnevna, poludnevna, nocna
 	
 	@Column(unique = false, nullable = true)
-	private String transportType; // zicara, gondola, zicara+gondola
+	@Enumerated(EnumType.STRING)
+	private TransportType transportType; // zicara, gondola, zicara+gondola
 	
 	@Column(unique = false, nullable = true)
 	private Date usingStart;
@@ -73,7 +74,7 @@ public class Tickets {
 		this.id = id;
 	}
 
-	public Tickets(Long id, SkiResort skiResort, String typeTicket, String usingPeriod, String transportType,
+	public Tickets(Long id, SkiResort skiResort, TypeTicket typeTicket, UsingPeriod usingPeriod, TransportType transportType,
 			Date usingStart, Date usingEnd, double initialPrice, int numOfChildren, int numOfAdult, int numOfSenior,
 			double bill, double insuranceBill, Set<PurchasedPolicy> purchasedPolicies) {
 		super();
@@ -93,7 +94,7 @@ public class Tickets {
 		this.purchasedPolicies = purchasedPolicies;
 	}
 
-	public Tickets(Long id, SkiResort skiResort, String typeTicket, String usingPeriod, String transportType,
+	public Tickets(Long id, SkiResort skiResort,  TypeTicket typeTicket, UsingPeriod usingPeriod, TransportType transportType,
 			Date usingStart, Date usingEnd, double initialPrice, int numOfChildren, int numOfAdult, int numOfSenior,
 			double bill) {
 		super();
@@ -132,27 +133,27 @@ public class Tickets {
 		this.skiResort = skiResort;
 	}
 
-	public String getTypeTicket() {
+	public TypeTicket getTypeTicket() {
 		return typeTicket;
 	}
 
-	public void setTypeTicket(String typeTicket) {
+	public void setTypeTicket(TypeTicket typeTicket) {
 		this.typeTicket = typeTicket;
 	}
 
-	public String getUsingPeriod() {
+	public UsingPeriod getUsingPeriod() {
 		return usingPeriod;
 	}
 
-	public void setUsingPeriod(String usingPeriod) {
+	public void setUsingPeriod(UsingPeriod usingPeriod) {
 		this.usingPeriod = usingPeriod;
 	}
 
-	public String getTransportType() {
+	public TransportType getTransportType() {
 		return transportType;
 	}
 
-	public void setTransportType(String transportType) {
+	public void setTransportType(TransportType transportType) {
 		this.transportType = transportType;
 	}
 

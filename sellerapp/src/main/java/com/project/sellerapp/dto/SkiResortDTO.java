@@ -2,9 +2,6 @@ package com.project.sellerapp.dto;
 
 import java.util.Date;
 
-import com.project.sellerapp.model.SkiResort;
-
-
 public class SkiResortDTO {
 
 	private Long id;
@@ -26,21 +23,7 @@ public class SkiResortDTO {
 	public SkiResortDTO() {
 		super();
 	}
-//	public SkiResortDTO(SkiResort ski) {
-//		super();
-//		this.id = ski.getId();
-//		this.name = ski.getName();
-//		this.description = ski.getDescription();
-//		this.country = ski.getCountry();
-//		this.liftPrice = ski.getLiftPrice();
-//		this.gondolaPrice = ski.getGondolaPrice();
-//		this.seasonStarts = ski.getSeasonStarts();
-//		this.seasonEnds = ski.getSeasonEnds();
-//		this.groupCount = ski.getGroupCount();
-//		this.ticketDeposit = ski.getTicketDeposit();
-//		this.capacity = ski.getCapacity();
-//		this.active = ski.isActive();
-//	}
+
 
 	public SkiResortDTO(Long id, String name, String description, String country, double liftPrice, double gondolaPrice,
 			Date seasonStarts, Date seasonEnds, int groupCount, double ticketDeposit, double capacity, boolean active) {

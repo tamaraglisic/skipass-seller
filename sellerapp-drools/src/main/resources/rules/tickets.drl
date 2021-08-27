@@ -2,6 +2,7 @@
 package com.main
 
 import com.project.sellerapp.dto.TicketsDTO
+import com.project.sellerapp.model.*
 import com.project.sellerapp.dto.TicketUserDTO
 import com.project.sellerapp.helpers.Utility
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ rule "Price for lift transport"
 	agenda-group "transport_type"
 	lock-on-active true
     when
-        $t: TicketsDTO(transportType == "LIFT", $users: ticketUsers, $resort: skiResort)
-        $u: TicketUserDTO(userType == "ODRASLI" || userType== "DECA" || userType=="SENIOR") from $users
+        $t: TicketsDTO(transportType == TransportType.LIFT , $users: ticketUsers, $resort: skiResort)
+        $u: TicketUserDTO(userType == UserType.ADULT || userType == UserType.CHILD || userType== UserType.SENIOR) from $users
     then
     	System.out.println("lift transport" );
         $u.setSingleTicketPrice($resort.getLiftPrice());
@@ -23,8 +24,8 @@ rule "Price for gondola transport"
 	agenda-group "transport_type"
 	lock-on-active true
     when
-        $t: TicketsDTO(transportType == "GONDOLA", $users: ticketUsers, $resort: skiResort)
-        $u: TicketUserDTO(userType == "ODRASLI" || userType== "DECA" || userType=="SENIOR") from $users
+        $t: TicketsDTO(transportType == TransportType.GONDOLA, $users: ticketUsers, $resort: skiResort)
+        $u: TicketUserDTO(userType == UserType.ADULT || userType == UserType.CHILD || userType== UserType.SENIOR) from $users
     then
     	System.out.println("gondola transport" );
         $u.setSingleTicketPrice($resort.getGondolaPrice());
@@ -35,8 +36,8 @@ rule "Price for gondola+lift transport"
 	agenda-group "transport_type"
 	lock-on-active true
     when
-        $t: TicketsDTO(transportType == "LIFT+GONDOLA", $users: ticketUsers, $resort: skiResort)
-        $u: TicketUserDTO(userType == "ODRASLI" || userType== "DECA" || userType=="SENIOR") from $users
+        $t: TicketsDTO(transportType == TransportType.LIFTGONDOLA, $users: ticketUsers, $resort: skiResort)
+        $u: TicketUserDTO(userType == UserType.ADULT || userType == UserType.CHILD || userType== UserType.SENIOR) from $users
     then
     	System.out.println("lift+gondola transport" );
         $u.setSingleTicketPrice(($resort.getGondolaPrice()/2)+$resort.getLiftPrice());
@@ -47,8 +48,8 @@ rule "Discount for half-day ticket"
 	agenda-group "using_period"
 	lock-on-active true
     when
-        $t: TicketsDTO(usingPeriod == "POLUDNEVNA", $users: ticketUsers )
-        $u: TicketUserDTO(userType == "ODRASLI" || userType== "DECA" || userType=="SENIOR") from $users
+        $t: TicketsDTO(usingPeriod == UsingPeriod.HALFDAY, $users: ticketUsers )
+        $u: TicketUserDTO(userType == UserType.ADULT || userType == UserType.CHILD || userType== UserType.SENIOR) from $users
     then
     	System.out.println("poludnevna karta " );
         $u.addDiscountOnTicketPrice(35);
@@ -59,8 +60,8 @@ rule "Increase price for night ticket"
 	agenda-group "using_period"
 	lock-on-active true
     when
-        $t: TicketsDTO(usingPeriod == "NOCNA", $users: ticketUsers )
-        $u: TicketUserDTO(userType == "ODRASLI" || userType== "DECA" || userType=="SENIOR") from $users
+        $t: TicketsDTO(usingPeriod == UsingPeriod.NIGHT, $users: ticketUsers )
+        $u: TicketUserDTO(userType == UserType.ADULT || userType == UserType.CHILD || userType== UserType.SENIOR) from $users
     then
     	System.out.println("nocna karta" );
         $u.increaseTicketPrice(25);
@@ -72,10 +73,10 @@ rule "Generate type-ticket GROUP"
 	lock-on-active true
 		
     when
-        $t: TicketsDTO(typeTicket!="PORODICNA" && getNumberOfUsers()>=20)
+        $t: TicketsDTO(typeTicket!= TypeTicket.FAMILY && getNumberOfUsers()>=20)
     then
  
-    	$t.setTypeTicket("GRUPNA");
+    	$t.setTypeTicket(TypeTicket.GROUP);
     	System.out.println("grupna karta");
 end
 
@@ -84,11 +85,11 @@ rule "Generate type-ticket FAMILY"
 	lock-on-active true
 		
     when
-        $t: TicketsDTO(getUsersCount("ODRASLI")>=2 && getUsersCount("DECA")>=1 && getUsersCount("SENIORI")==0)
+        $t: TicketsDTO(getUsersCount(UserType.ADULT)>=2 && getUsersCount(UserType.CHILD)>=1 && getUsersCount(UserType.SENIOR)==0)
     then
     	System.out.println("porodicna karta");
     	modify($t){
-    		setTypeTicket("PORODICNA");
+    		setTypeTicket(TypeTicket.FAMILY);
     	}
 
 end
@@ -98,7 +99,7 @@ rule "Add Group discount"
 	salience -4
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "GRUPNA")
+        $t: TicketsDTO(typeTicket == TypeTicket.GROUP)
     then
     	$t.addDiscount(10);
     	System.out.println("GROUP ticket discount");
@@ -111,7 +112,7 @@ rule "Add Family discount"
 	salience -4
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "PORODICNA")
+        $t: TicketsDTO(typeTicket == TypeTicket.FAMILY)
     then
     	$t.addDiscount(15);
     	System.out.println("FAMILY ticket discount");
@@ -124,7 +125,7 @@ rule "Add Family loyalty discount"
 	salience -3
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "PORODICNA", $ps: privilege)
+        $t: TicketsDTO(typeTicket == TypeTicket.FAMILY, $ps: privilege)
         Number($value: intValue >= 1) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
         	count($p)
@@ -142,7 +143,7 @@ rule "Add CHILD discount"
 	lock-on-active true
     when
         $t: TicketsDTO($users: ticketUsers)
-        $u: TicketUserDTO(userType == "DECA") from $users
+        $u: TicketUserDTO(userType == UserType.CHILD) from $users
     then
     	$u.addDiscountOnTicketPrice(20);
     	System.out.println("CHILD discount");
@@ -155,7 +156,7 @@ rule "Add SENIOR discount"
 	lock-on-active true
     when
         $t: TicketsDTO($users: ticketUsers)
-        $u: TicketUserDTO(userType == "SENIOR") from $users
+        $u: TicketUserDTO(userType == UserType.SENIOR) from $users
     then
     	$u.addDiscountOnTicketPrice(10);
     	System.out.println("SENIOR discount");
@@ -168,7 +169,7 @@ rule "Add SENIOR or ADULT discount based on period"
 	lock-on-active true
     when
         $t: TicketsDTO(Utility.getDays(usingStart, usingEnd) >= 2, $days: Utility.getDays(usingStart, usingEnd), $users: ticketUsers)
-        $u: TicketUserDTO(userType == "SENIOR" || userType == "ODRASLI") from $users
+        $u: TicketUserDTO(userType == UserType.SENIOR || userType == UserType.ADULT) from $users
     then
     	$u.addDiscountOnTicketPrice($days*4);
     	System.out.println("SENIOR or ADULT discount based on period");
@@ -181,7 +182,7 @@ rule "Add CHILD discount based on period"
 	lock-on-active true
     when
         $t: TicketsDTO( Utility.getDays(usingStart, usingEnd) >= 2, $days: Utility.getDays(usingStart, usingEnd),  $users: ticketUsers)
-        $u: TicketUserDTO(userType == "DECA") from $users
+        $u: TicketUserDTO(userType == UserType.CHILD) from $users
     then
     	$u.addDiscountOnTicketPrice($days*7);
     	System.out.println("CHILD discount based on period");
@@ -217,8 +218,8 @@ rule "Get bill 2"
 	salience -0.9
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "POJEDINACNA" || typeTicket == "GRUPNA", $ps: privilege, $users: ticketUsers)
-        $odrasli: TicketUserDTO( userType == "ODRASLI") from $users    
+        $t: TicketsDTO(typeTicket == TypeTicket.SINGLE || typeTicket == TypeTicket.GROUP, $ps: privilege, $users: ticketUsers)
+        $odrasli: TicketUserDTO( userType == UserType.ADULT) from $users    
         Number($Lvalue: intValue) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
         	count($p)
@@ -243,8 +244,8 @@ rule "Get bill 2.1"
 	salience -0.9
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "POJEDINACNA" || typeTicket == "GRUPNA", $ps: privilege, $users: ticketUsers)
-        $seniori: TicketUserDTO( userType == "SENIOR") from $users
+        $t: TicketsDTO(typeTicket == TypeTicket.SINGLE || typeTicket == TypeTicket.GROUP, $ps: privilege, $users: ticketUsers)
+        $seniori: TicketUserDTO( userType == UserType.SENIOR) from $users
          Number($Lvalue: intValue) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
         	count($p)
@@ -267,8 +268,8 @@ rule "Get bill 2.2"
 	salience -0.9
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "POJEDINACNA" || typeTicket == "GRUPNA", $ps: privilege, $users: ticketUsers)
-        $deca: TicketUserDTO( userType == "DECA") from $users
+        $t: TicketsDTO(typeTicket == TypeTicket.SINGLE || typeTicket == TypeTicket.GROUP, $ps: privilege, $users: ticketUsers)
+        $deca: TicketUserDTO( userType == UserType.CHILD) from $users
          Number($Lvalue: intValue) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
         	count($p)
@@ -293,8 +294,8 @@ rule "Get bill 3"
 	salience -0.8
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "PORODICNA", $ps: privilege, $users: ticketUsers)
-       	$odrasli: TicketUserDTO( userType == "ODRASLI") from $users
+        $t: TicketsDTO(typeTicket == TypeTicket.FAMILY, $ps: privilege, $users: ticketUsers)
+       	$odrasli: TicketUserDTO( userType == UserType.ADULT) from $users
         
         Number($Lvalue: intValue) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
@@ -319,8 +320,8 @@ rule "Get bill 3.1"
 	salience -0.8
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "PORODICNA", $ps: privilege, $users: ticketUsers)
-        $seniori: TicketUserDTO( userType == "SENIOR") from $users
+        $t: TicketsDTO(typeTicket == TypeTicket.FAMILY, $ps: privilege, $users: ticketUsers)
+        $seniori: TicketUserDTO( userType == UserType.SENIOR) from $users
         
         Number($Lvalue: intValue) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
@@ -345,8 +346,8 @@ rule "Get bill 3.2"
 	salience -0.8
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "PORODICNA", $ps: privilege, $users: ticketUsers)
-        $deca: TicketUserDTO( userType == "DECA") from $users
+        $t: TicketsDTO(typeTicket == TypeTicket.FAMILY, $ps: privilege, $users: ticketUsers)
+        $deca: TicketUserDTO( userType == UserType.CHILD) from $users
         
         Number($Lvalue: intValue) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
@@ -371,7 +372,7 @@ rule "Get bill 3.3"
 	salience -0.8
 	no-loop true
     when
-        $t: TicketsDTO(typeTicket == "PORODICNA", $ps: privilege)
+        $t: TicketsDTO(typeTicket == TypeTicket.FAMILY, $ps: privilege)
         Number($value: intValue >= 1) from accumulate(
         	String($p: this, this.contains("Loyalty")) from $ps,
         	count($p)

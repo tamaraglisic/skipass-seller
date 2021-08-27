@@ -1,13 +1,14 @@
 package com.project.sellerapp.dto;
 
+import com.project.sellerapp.model.UserType;
 
 public class TicketUserDTO {
 	
-	private String userType;
+	private UserType userType;
 	private int count;
 	private double singleTicketPrice;
 	
-	public TicketUserDTO(String userType, int count, double singleTicketPrice) {
+	public TicketUserDTO(UserType userType, int count, double singleTicketPrice) {
 		super();
 		this.userType = userType;
 		this.count = count;
@@ -18,11 +19,11 @@ public class TicketUserDTO {
 		super();
 	}
 
-	public String getUserType() {
+	public UserType getUserType() {
 		return userType;
 	}
 
-	public void setUserType(String userType) {
+	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
 

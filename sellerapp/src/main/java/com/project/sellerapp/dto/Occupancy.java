@@ -1,6 +1,5 @@
 package com.project.sellerapp.dto;
 
-import java.util.Date;
 
 public class Occupancy {
 	

@@ -132,7 +132,6 @@ rule "Add Family loyalty discount"
         )
        	eval($value >= 1)
     then
-    	//$t.calculateBill();
     	$t.addDiscount(15);
     	System.out.println("FAMILY LOYALTY discount");
 end
@@ -290,7 +289,6 @@ end
 
 rule "Get bill 3"
 	agenda-group "calculating_bill"
-
 	salience -0.8
 	no-loop true
     when
@@ -316,7 +314,6 @@ end
 
 rule "Get bill 3.1"
 	agenda-group "calculating_bill"
-
 	salience -0.8
 	no-loop true
     when
@@ -357,18 +354,15 @@ rule "Get bill 3.2"
         	String($r: this, this.contains("Student")) from $ps,
         	count($r)
         )
-        
         eval($Lvalue == 0 && $Svalue > 0)
     then
    		$t.addToBill($deca.getCount()*$deca.getSingleTicketPrice());
    	
-   		System.out.println("Calculate bill with student privilege type ticket porodicna (deca)");
-    	
+   		System.out.println("Calculate bill with student privilege type ticket porodicna (deca)"); 	
 end
 
 rule "Get bill 3.3"
 	agenda-group "calculating_bill"
-
 	salience -0.8
 	no-loop true
     when
@@ -377,12 +371,10 @@ rule "Get bill 3.3"
         	String($p: this, this.contains("Loyalty")) from $ps,
         	count($p)
         )
-        
        	eval($value >= 1)
     then
     	$t.calculateBill();
     	System.out.println("Calculate bill with loyalty privilege type ticket porodicna");
-
 end
 
 

@@ -39,7 +39,7 @@ public class TicketsService {
 	private KieService kieService;
 	
 
-	public double getFinalPrice(TicketsDTO tickets) {
+	public TicketsDTO getFinalPrice(TicketsDTO tickets) {
 		System.out.println("Calculating final price");
 
 		
@@ -110,7 +110,7 @@ public class TicketsService {
 		
 		System.out.println(tickets);
 		
-		return tickets.getBill();
+		return tickets;
 		
 	}
 	private List<TicketsDTO> toDtoList(List<Tickets> list){

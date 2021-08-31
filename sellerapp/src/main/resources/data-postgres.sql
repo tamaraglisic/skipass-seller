@@ -12,11 +12,11 @@ insert into users_authority (user_id, authority_id) values (2, 2);
 insert into users_authority (user_id, authority_id) values (3, 1);
 insert into users_authority (user_id, authority_id) values (4, 2);
 
-insert into ski_resort (name, description, country, lift_price, gondola_price, season_starts, season_ends, group_count, ticket_deposit, capacity, active) values('Kopaonik','Skijaliste u Srbiji', 'Srbija', 4500, 1000, '2021-03-01 00:00:00', '2021-08-01 00:00:00', 20, 500, 10256, true);
-insert into ski_resort (name, description, country, lift_price, gondola_price, season_starts, season_ends, group_count, ticket_deposit, capacity, active) values('Tornik','Skijaliste u Srbiji', 'Srbija', 2500, 1000, '2021-03-01 00:00:00', '2021-08-01 00:00:00', 20, 500, 8000, true);
+insert into ski_resort (name, description, country, lift_price, gondola_price, season_starts, season_ends, group_count, ticket_deposit, capacity, active) values('Kopaonik','Skijaliste u Srbiji', 'Srbija', 4500, 1000, '2021-08-25 00:00:00', '2021-11-30 00:00:00', 20, 500, 10256, true);
+insert into ski_resort (name, description, country, lift_price, gondola_price, season_starts, season_ends, group_count, ticket_deposit, capacity, active) values('Tornik','Skijaliste u Srbiji', 'Srbija', 2500, 1000, '2021-09-16 00:00:00', '2021-12-31 00:00:00', 20, 500, 8000, true);
 
-insert into tickets (bill, num_of_children, num_of_adult, num_of_senior, initial_price, transport_type, type_ticket, using_start, using_end, using_period, ski_resort_id, insurance_bill) values (12364,2,2,0, 200, 'LIFT', 'FAMILY', '2021-05-25 00:00:00', '2021-05-30 00:00:00', 'DAY', 1,15000);
-insert into tickets (bill, num_of_children, num_of_adult, num_of_senior, initial_price, transport_type, type_ticket, using_start, using_end, using_period, ski_resort_id, insurance_bill) values (12364,0,0 ,1700, 200, 'LIFT', 'FAMILY', '2021-08-13 00:00:00', '2021-08-14 00:00:00', 'DAY', 1,0);
+insert into tickets (bill, num_of_children, num_of_adult, num_of_senior, initial_price, transport_type, type_ticket, using_start, using_end, using_period, ski_resort_id, insurance_bill) values (12364,2,2,3000, 200, 'LIFT', 'FAMILY', '2021-05-28 00:00:00', '2021-05-30 00:00:00', 'DAY', 1,15000);
+insert into tickets (bill, num_of_children, num_of_adult, num_of_senior, initial_price, transport_type, type_ticket, using_start, using_end, using_period, ski_resort_id, insurance_bill) values (12364,0,900 ,1700, 200, 'LIFT', 'FAMILY', '2021-08-13 00:00:00', '2021-08-14 00:00:00', 'DAY', 1,0);
 
 insert into tickets (bill, num_of_children, num_of_adult, num_of_senior, initial_price, transport_type, type_ticket, using_start, using_end, using_period, ski_resort_id, insurance_bill) values (12364,0,2,0,200, 'LIFT', 'FAMILY', '2021-04-25 00:00:00', '2021-04-28 00:00:00', 'DAY', 1,0);
 insert into tickets (bill, num_of_children, num_of_adult, num_of_senior, initial_price, transport_type, type_ticket, using_start, using_end, using_period, ski_resort_id, insurance_bill) values (12364,0,2,0, 200, 'LIFT', 'FAMILY', '2020-05-25 00:00:00', '2020-05-28 00:00:00', 'DAY', 1,0);

@@ -59,10 +59,6 @@ export class MyReservationsComponent implements OnInit {
 
   }
 
-  newRes(): void{
-    
-  }
-
   countPolicies(tickets: Tickets){
     return tickets.purchasedPolicies?.length;
   }

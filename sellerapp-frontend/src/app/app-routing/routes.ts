@@ -17,21 +17,17 @@ import { NewResortComponent } from '../pages/resort/new-resort/new-resort.compon
 import { RegistrationPageComponent } from '../pages/auth/registration-page/registration-page.component';
 
 export const routes :Routes = [
-	// {
-	// 	path: '',
-	// 	component: HomePageComponent
-	// },
+	{
+		path: '',
+		component: LoginPageComponent
+	},
 	{
 		path: 'login',
 		component: LoginPageComponent,
-		//canActivate: [LoginGuard]
-
 	},
 	{
 		path: 'registration',
 		component: RegistrationPageComponent,
-		//canActivate: [LoginGuard]
-
 	},
 	{
 		path: 'error-unauthorized',
@@ -52,8 +48,6 @@ export const routes :Routes = [
 	{
 		path: 'capacity',
 		component: ResortCapacityComponent,
-	//	canActivate: [LoginGuard]
-
 	},
 	{
 		path:'new-reservation',
@@ -64,7 +58,6 @@ export const routes :Routes = [
 	{
 		path:'ski-resorts',
 		component: AllResortsComponent,
-		//canActivate: [LoginGuard]
 	},
 	{
 		path:'home',

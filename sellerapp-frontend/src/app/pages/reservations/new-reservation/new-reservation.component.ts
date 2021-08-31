@@ -64,11 +64,21 @@ export class NewReservationComponent implements OnInit {
   onSelection(event: any): void{
     this.skiResort = this.selected;
     this.minDate = new Date(this.skiResort.seasonStarts);
+    let today = new Date();
+    if(this.minDate < today ){
+      this.minDate = today;
+    }
     // uporedi sa danasnjim datumom
     this.maxDate = new Date(this.skiResort.seasonEnds);
   }
 
   makeReservation(): void{
+    if (this.skiResort == null){
+      {
+        this.toastr.error('Input necessary information');
+      }
+      return;
+    }
     console.log("Make reservation");
     // izracunaj cenu rezervisanih karata
     this.res.skiResort = this.skiResort;
@@ -112,7 +122,7 @@ export class NewReservationComponent implements OnInit {
         }
         else{
           let message = `Your bill is ` + this.res.bill;
-          if(this.ticketForm.value.usingStart.getTime() != this.res.usingStart){
+          if(this.ticketForm.value.usingEnd.getTime() != this.res.usingEnd){
             message +=`
             Congratulations, you get one more day!`;
           }

@@ -54,9 +54,9 @@ public class TicketsController {
 		try {
 			log.debug("Item request received for: " + ticketsDto.getSkiResort().getName());
 			System.out.println(ticketsDto.getUsingPeriod());
-			double price = ticketsService.getFinalPrice(ticketsDto);
-			System.out.println("Price: " + price);
-	        return new ResponseEntity<>(ticketsDto, HttpStatus.OK);
+			TicketsDTO dto = ticketsService.getFinalPrice(ticketsDto);
+			System.out.println("Price: " + dto.getBill());
+	        return new ResponseEntity<>(dto, HttpStatus.OK);
 		}
 		catch(Exception e) {
 			
